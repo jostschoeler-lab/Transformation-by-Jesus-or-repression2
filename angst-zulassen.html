@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angst zulassen • Verwandlung mit Jesus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .prose-custom p {
+            margin-bottom: 1.25rem;
+            line-height: 1.75;
+        }
+
+        .bible-quote {
+            border-left: 4px solid #6366f1;
+            background: linear-gradient(to right, #f0f0ff, transparent);
+        }
+
+        .nav-active {
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .exercise-box {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-cross text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight text-slate-900">Verwandlung mit Jesus</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="index.html#hooks" class="hover:text-blue-700 transition-colors">Einstiege</a>
+                    <a href="grundlagen.html" class="hover:text-blue-700 transition-colors">Grundlagen</a>
+                    <a href="jesus-stuhl.html" class="hover:text-blue-700 transition-colors">Der Jesus-Stuhl</a>
+                    <a href="beispiele.html" class="hover:text-blue-700 transition-colors">Beispiele</a>
+                </div>
+                
+                <div class="flex items-center gap-x-3">
+                    <a href="#kontakt" 
+                       class="px-5 py-2.5 text-sm font-medium bg-white border border-slate-300 hover:bg-slate-50 rounded-3xl transition-colors flex items-center gap-x-2">
+                        <i class="fa-solid fa-envelope text-xs"></i>
+                        <span>Kontakt</span>
+                    </a>
+                    <a href="#download" 
+                       class="px-6 py-2.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-3xl transition-all flex items-center gap-x-2 shadow-sm">
+                        <i class="fa-solid fa-book text-xs"></i>
+                        <span>Das Buch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Topic Header -->
+    <header class="bg-white border-b border-slate-100">
+        <div class="max-w-5xl mx-auto px-6 pt-12 pb-10">
+            <div class="flex items-center gap-x-3 mb-4">
+                <div class="w-12 h-12 bg-indigo-500 rounded-2xl flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-exclamation-triangle text-white text-3xl"></i>
+                </div>
+                <div>
+                    <span class="uppercase tracking-[3px] text-xs font-semibold text-indigo-600">PRAKTISCHER EINSTIEG #7</span>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter text-slate-900 leading-none mb-4">
+                Angst zulassen –<br>statt zu verdrängen<br>oder zu vermeiden
+            </h1>
+            
+            <p class="max-w-2xl text-2xl text-slate-600 font-light tracking-tight">
+                Ein praktischer Einstieg für Menschen, die von Angst geplagt werden
+            </p>
+            
+            <div class="mt-6 flex items-center gap-x-4 text-sm">
+                <div class="inline-flex items-center gap-x-2 bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-3xl text-xs font-medium">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span>MT 11,28  •  2. KOR 12,9-10</span>
+                </div>
+                <a href="index.html#hooks" class="text-indigo-600 hover:text-indigo-700 flex items-center gap-x-1 text-sm font-medium">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span>Zurück zu allen Einstiegen</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        
+        <!-- Intro -->
+        <div class="prose-custom text-[15.5px] text-slate-700 leading-relaxed mb-12">
+            <p>Viele von uns kennen das: Das Herz klopft, die Brust wird eng, die Gedanken kreisen, und es fühlt sich an, als könnte jeden Moment etwas Schlimmes passieren. Du betest, du versuchst, die Angst wegzuschieben oder „dich einfach mehr Jesus hinzugeben“ – und manchmal wird sie dadurch sogar noch stärker.</p>
+            
+            <p>Das ist keine Seltenheit. Und es ist auch kein Zeichen von zu wenig Glauben. Es ist ein Zeichen, dass unsere gottgegebenen Grundbedürfnisse (vor allem nach Sicherheit und Bindung) in manchen Bereichen nicht ausreichend erfüllt wurden – und dass die gefühlte Bedürfnisspannung des inneren Kindes noch da ist.</p>
+        </div>
+
+        <!-- Die zwei Fallen -->
+        <section class="mb-14">
+            <div class="flex items-center gap-x-3 mb-6">
+                <div class="w-9 h-9 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-exclamation-circle text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900">Die zwei Fallen: Verdrängung und Vermeidung</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Verdrängung -->
+                <div class="bg-white border border-orange-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <div class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-2xl">FALLE 1</div>
+                    </div>
+                    <h3 class="font-bold text-xl text-orange-800 mb-3">Verdrängung</h3>
+                    <p class="text-sm text-orange-700 leading-relaxed">Verdrängung bedeutet: Das Gefühl selbst wegschieben. Wir sagen uns (oft unbewusst): „Das darf ich nicht fühlen“, „Ich muss stark sein“, „Ich bete das einfach weg“ oder „Das ist nicht von Gott“. Die Angst wird aus dem Bewusstsein gedrängt.</p>
+                    <p class="mt-3 text-sm text-orange-600">Kurzfristig sinkt die Spannung – aber sie bleibt im Unbewussten bestehen und kommt später meist stärker zurück.</p>
+                </div>
+                
+                <!-- Vermeidung -->
+                <div class="bg-white border border-amber-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <div class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-2xl">FALLE 2</div>
+                    </div>
+                    <h3 class="font-bold text-xl text-amber-800 mb-3">Vermeidung</h3>
+                    <p class="text-sm text-amber-700 leading-relaxed">Vermeidung bedeutet: Wenn die Verdrängung der Gefühle nicht mehr hilft, dann wird die Situation gemieden, die die Angst auslöst. Wir gehen bestimmten Orten, Gesprächen, Menschen oder Aufgaben aus dem Weg.</p>
+                    <p class="mt-3 text-sm text-amber-600">Auch das senkt die Spannung kurzfristig. Langfristig aber lernen wir keine neuen, angstüberwindenden Erfahrungen – die Angst wird größer und kann bis zu Panikattacken führen.</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-slate-100 border border-slate-200 rounded-3xl p-6 text-sm text-slate-600">
+                <strong>Beide Strategien</strong> sind Versuche der unpassenden Spannungsreduktion. Beide halten die unerfüllte Bedürfnisspannung im inneren Kind am Leben. Beides verhindert, dass die Angst in der Gegenwart Jesu geheilt und verwandelt werden kann.
+            </div>
+        </section>
+
+        <!-- Wozu Jesus wirklich einlädt -->
+        <section class="mb-14">
+            <div class="flex items-center gap-x-3 mb-6">
+                <div class="w-9 h-9 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-hand-holding-heart text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900">Wozu Jesus wirklich einlädt</h2>
+            </div>
+            
+            <div class="prose-custom text-[15.5px] text-slate-700 leading-relaxed">
+                <p>Jesus sagt nicht: „Hör auf, Angst zu haben.“ Er sagt: <span class="font-medium">„Komm zu mir, alle, die ihr mühselig und beladen seid“</span> (Mt 11,28). Er ist der barmherzige Hohepriester, der mit uns leidet und uns Gnade und Barmherzigkeit finden lässt (Hebr 4,15–16). <strong>Er verurteilt dich nicht für deine Angst.</strong></p>
+                
+                <p>Er lädt dich ein, die Angst <strong>zuzulassen</strong> – nicht, damit du sie bekämpfst, sondern damit er sie mit dir zusammen tragen und verwandeln kann.</p>
+            </div>
+            
+            <div class="my-8 bible-quote pl-6 py-5 pr-8 rounded-r-3xl">
+                <p class="text-slate-700 italic">Paulus zeigt uns genau diesen Weg. Er hatte einen „Dorn im Fleisch“, den er dreimal von Jesus wegbeten wollte (2. Kor 12,7–8). Aber Jesus antwortete ihm:</p>
+                <p class="mt-3 text-lg font-medium text-indigo-700">„Meine Gnade genügt dir, denn meine Kraft wird in der Schwachheit vollkommen“ (V. 9).</p>
+                <p class="mt-4 text-sm text-slate-600">Paulus lernte: Es geht nicht darum, dass alle Angst sofort verschwindet, wenn wir in Jesus sind. Es geht darum, dass wir in unserer Schwachheit und Angst bei ihm bleiben und uns von ihm unsere Bedürfnisse befriedigen lassen – auch wenn wir es noch nicht sofort fühlen.</p>
+            </div>
+            
+            <div class="prose-custom text-[15.5px] text-slate-700 leading-relaxed">
+                <p>Deshalb schreibt er in <strong>2. Korinther 12,10</strong>:</p>
+                <p class="font-medium">„Darum habe ich Wohlgefallen an Schwachheiten, an Misshandlungen, an Nöten, an Verfolgungen und Ängsten um Christi willen; denn wenn ich schwach bin, dann bin ich stark.“</p>
+                <p>Paulus ist der Angst nicht ausgewichen. Er hat gelernt, in ihr die Kraft Christi zu erfahren.</p>
+                
+                <p class="mt-4">Auch in <strong>2. Korinther 4,8-9</strong> beschreibt er die Realität des Lebens mit Jesus:</p>
+                <p class="italic">„Wir sind bedrängt, aber nicht erdrückt; wir zweifeln, aber nicht verzweifeln; wir werden verfolgt, aber nicht verlassen; wir werden niedergeworfen, aber nicht vernichtet.“</p>
+                <p>Die Angst ist real – aber sie ist nicht das Letzte. In Christus sind wir nicht aufgegeben.</p>
+            </div>
+        </section>
+
+        <!-- Praktische Übung -->
+        <section class="mb-14">
+            <div class="bg-indigo-50 border border-indigo-200 rounded-3xl p-8 md:p-10">
+                <div class="flex items-start gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex-shrink-0 flex items-center justify-center">
+                        <i class="fa-solid fa-pray text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="uppercase tracking-wider text-xs font-bold text-indigo-600 mb-1">DIE PRAKTISCHE ÜBUNG</div>
+                        <h2 class="text-3xl font-bold tracking-tight text-indigo-900">Der Jesus-Stuhl bei Angst</h2>
+                    </div>
+                </div>
+                
+                <div class="text-indigo-800 text-[15.5px] leading-relaxed space-y-5">
+                    <p>Setz dich im Gebet vor Jesus (oder stell dir vor, du sitzt mit ihm zusammen). Sag ganz ehrlich und ohne Druck:</p>
+                    
+                    <div class="bg-white border border-indigo-200 rounded-2xl p-6 text-center">
+                        <p class="font-medium text-lg text-indigo-900">„Jesus, ich habe Angst.<br>Hier ist meine Angst.<br>Was willst du mir dazu sagen?<br>Wie siehst du mich in dieser Angst?“</p>
+                    </div>
+                    
+                    <p>Dann <strong>warte</strong>. Spüre seine Gegenwart. Du musst nichts „tun“ oder die Angst wegdrücken. Du darfst die dramatischen Gefühle einfach da sein lassen – in seiner Liebe.</p>
+                    
+                    <p>Vielleicht nimmt sie erst einmal zu, weil du nicht mehr verdrängst oder vermeidest. Er nimmt sie nicht immer sofort weg, aber er gibt dir etwas viel Tieferes: <strong>neue Erfahrungen der Sicherheit und Geborgenheit in seiner Gegenwart.</strong></p>
+                    
+                    <div class="pt-4 border-t border-indigo-200 text-sm">
+                        Die Gefühle lernen langsam (der Verstand lernt schnell, die Gefühle langsam). Aber je öfter du diese Erlebnisse mit Jesus machst, desto mehr verlieren die alten dramatischen Gefühle ihre Macht. Sie werden nicht mehr so leicht aktiviert.
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-indigo-200 text-xs text-indigo-600 flex items-center gap-x-2">
+                    <i class="fa-solid fa-info-circle"></i>
+                    <span>Tipp: Viele machen diese Übung täglich 5–10 Minuten. Die Veränderung kommt durch die wiederholte, sichere Begegnung mit Jesus in der Angst.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Die Falle des schnell loswerden wollen -->
+        <section class="mb-14">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 mb-6">Die Falle des „schnell loswerden wollen“</h2>
+            
+            <div class="prose-custom text-[15.5px] text-slate-700 leading-relaxed">
+                <p>Viele, die stark unter Angst leiden, wollen sie einfach „weg haben“. Das ist verständlich. Aber genau dieser Wunsch führt oft in die Falle: Je mehr wir die Angst bekämpfen, verdrängen oder vermeiden, desto lauter wird sie langfristig.</p>
+                
+                <p>Manche haben erlebt, dass der gut gemeinte Rat „sich einfach mehr Jesus hingeben, dann hört die Angst schnell auf“ die Angst sogar noch verstärkt hat – weil kein sicherer Raum da war, in dem die Angst gehalten und mit Jesus angeschaut werden konnte.</p>
+                
+                <div class="my-6 p-6 bg-rose-50 border border-rose-200 rounded-3xl">
+                    <p class="font-medium text-rose-800">Der Weg der Verwandlung ist ein anderer:</p>
+                    <p class="mt-2 text-rose-700">Nicht die Angst loswerden wollen, sondern sie mit Jesus zusammen zulassen. Mit ihm leiden, damit du auch mit ihm verherrlicht wirst. <span class="font-semibold">Röm 8,17</span>.</p>
+                    <p class="mt-2 text-sm text-rose-600">Gerade in der zugelassenen Schwachheit wird seine Kraft sichtbar und wirksam.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nächster Schritt -->
+        <section class="mb-12">
+            <div class="bg-white border border-slate-200 rounded-3xl p-8">
+                <h3 class="font-bold text-xl tracking-tight mb-4 flex items-center gap-x-2">
+                    <i class="fa-solid fa-arrow-right text-blue-600"></i>
+                    <span>Nächster Schritt</span>
+                </h3>
+                <p class="text-slate-600 mb-4">In den Grundlagen findest du mehr dazu:</p>
+                
+                <ul class="space-y-3 text-sm text-slate-700">
+                    <li class="flex gap-x-3">
+                        <span class="mt-1.5 block w-1.5 h-1.5 bg-indigo-400 rounded-full flex-shrink-0"></span>
+                        <span>Wie Angst aus unerfüllten Grundbedürfnissen (Sicherheit, Bindung) im inneren Kind entsteht</span>
+                    </li>
+                    <li class="flex gap-x-3">
+                        <span class="mt-1.5 block w-1.5 h-1.5 bg-indigo-400 rounded-full flex-shrink-0"></span>
+                        <span>Warum Verdrängung und Vermeidung langfristig die Spannung erhöhen (Teufelskreis)</span>
+                    </li>
+                    <li class="flex gap-x-3">
+                        <span class="mt-1.5 block w-1.5 h-1.5 bg-indigo-400 rounded-full flex-shrink-0"></span>
+                        <span>Wie der Jesus-Stuhl konkret funktioniert (Gedanken und Gefühle „hinter Gittern“ nehmen und mit Jesus anschauen)</span>
+                    </li>
+                    <li class="flex gap-x-3">
+                        <span class="mt-1.5 block w-1.5 h-1.5 bg-indigo-400 rounded-full flex-shrink-0"></span>
+                        <span>Warum Gefühle langsam lernen und viele positive Jesus-Erlebnisse brauchen</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-6">
+                    <a href="grundlagen.html" class="inline-flex items-center gap-x-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+                        <span>Zu den Grundlagen</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing encouragement -->
+        <div class="text-center py-8 border-t border-slate-200">
+            <div class="max-w-md mx-auto">
+                <p class="text-lg text-slate-700 font-light">Du bist nicht allein damit. <strong>Jesus ist bei dir</strong> – auch (und besonders) in der Angst.</p>
+                <p class="mt-2 text-sm text-slate-500">Er will dich nicht verändern, bevor du „stark“ bist. Er will dich in deiner Schwachheit begegnen und seine Kraft in dir vollkommen machen.</p>
+                
+                <div class="mt-6 inline-block bg-white border border-indigo-200 rounded-3xl px-8 py-4">
+                    <p class="text-sm font-medium text-indigo-700">„Meine Gnade genügt dir, denn meine Kraft wird in der Schwachheit vollkommen.“</p>
+                    <p class="text-xs text-indigo-500 mt-1">– 2. Korinther 12,9</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-10">
+        <div class="max-w-6xl mx-auto px-6 text-center text-sm text-slate-500">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-2 mb-4">
+                <a href="index.html#kontakt" class="hover:text-blue-600 transition-colors">Kontakt</a>
+                <span class="hidden md:inline text-slate-300">•</span>
+                <a href="index.html#download" class="hover:text-blue-600 transition-colors">Das Buch</a>
+                <span class="hidden md:inline text-slate-300">•</span>
+                <a href="jesus-stuhl.html" class="hover:text-blue-600 transition-colors">Der Jesus-Stuhl</a>
+                <span class="hidden md:inline text-slate-300">•</span>
+                <a href="index.html#hooks" class="hover:text-blue-600 transition-colors">Alle Einstiege</a>
+            </div>
+            <p>© 2026 Verwandlung mit Jesus • Alle Rechte vorbehalten</p>
+            <p class="mt-1 text-xs">Basierend auf biblischer Wahrheit und bewährten Erkenntnissen der inneren Heilung. • Aus den Grundlagen zur Verwandlung</p>
+        </div>
+    </footer>
+
+</body>
+</html>

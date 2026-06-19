@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christlicher Burnout – Die inneren Antreiber und die Einladung Jesu • Verwandlung mit Jesus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .nav-active {
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .mode-card {
+            transition: all 0.3s ease;
+        }
+
+        .content-text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #334155;
+        }
+
+        .dialogue-box {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-cross text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight text-slate-900">Verwandlung mit Jesus</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="index.html#hooks" class="hover:text-blue-700 transition-colors">Einstiege</a>
+                    <a href="grundlagen.html" class="hover:text-blue-700 transition-colors">Grundlagen</a>
+                    <a href="jesus-stuhl.html" class="hover:text-blue-700 transition-colors">Der Jesus-Stuhl</a>
+                    <a href="beispiele.html" class="hover:text-blue-700 transition-colors">Beispiele</a>
+                </div>
+                
+                <div class="flex items-center gap-x-3">
+                    <a href="index.html#kontakt" 
+                       class="px-5 py-2.5 text-sm font-medium bg-white border border-slate-300 hover:bg-slate-50 rounded-3xl transition-colors flex items-center gap-x-2">
+                        <i class="fa-solid fa-envelope text-xs"></i>
+                        <span>Kontakt</span>
+                    </a>
+                    <a href="index.html#download" 
+                       class="px-6 py-2.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-3xl transition-all flex items-center gap-x-2 shadow-sm">
+                        <i class="fa-solid fa-book text-xs"></i>
+                        <span>Das Buch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-gradient-to-br from-amber-50 via-white to-white border-b border-amber-100">
+        <div class="max-w-4xl mx-auto px-6 pt-12 pb-10">
+            <div class="flex items-start gap-x-5">
+                <div class="w-16 h-16 bg-amber-500 rounded-3xl flex-shrink-0 flex items-center justify-center shadow-inner mt-1">
+                    <i class="fa-solid fa-battery-quarter text-white text-4xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-3xl bg-amber-100 text-amber-700 text-xs font-semibold tracking-[2px] mb-3">
+                        PRAKTISCHER EINSTIEG
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-amber-900 leading-none mb-2">
+                        Christlicher Burnout
+                    </h1>
+                    <p class="text-2xl text-amber-700 tracking-tight">Die inneren Antreiber und die Einladung Jesu</p>
+                    
+                    <div class="mt-4 flex items-center gap-x-4 text-sm">
+                        <a href="index.html#hooks" 
+                           class="inline-flex items-center gap-x-2 text-amber-600 hover:text-amber-700 font-medium transition-colors">
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                            <span>Zurück zur Übersicht</span>
+                        </a>
+                        <span class="text-amber-300">•</span>
+                        <a href="jesus-stuhl.html" 
+                           class="inline-flex items-center gap-x-2 text-amber-600 hover:text-amber-700 font-medium transition-colors">
+                            <span>Zum Jesus-Stuhl</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        
+        <!-- Einleitung -->
+        <div class="mb-10">
+            <p class="content-text mb-6">
+                Viele Menschen halten so lange durch, bis der Körper selbst Schluss macht. Sie wissen innerlich oft schon länger, dass es zu viel geworden ist, aber sie schaffen es nicht, freiwillig weniger zu machen. Das liegt daran, dass starke innere Antreiber ihnen sagen, dass Nachlassen nicht erlaubt ist. Diese Antreiber sind oft tief verwurzelt – manchmal seit der Kindheit als Überlebensstrategie, manchmal durch christliche Prägung verstärkt. Sie sorgen dafür, dass man Symptome überspielt und weitermacht, bis es nicht mehr geht.
+            </p>
+            
+            <p class="content-text mb-6">
+                Die Erschöpfung entsteht meist nicht durch eine einzige Ursache. Sie kommt, wenn mehrere Belastungen gleichzeitig auf eine begrenzte innere Kapazität treffen. Das kann ein Trauma sein, das die Stressregulationsfähigkeit schon von früher her einschränkt. Es kann aber auch sein, dass man über längere Zeit in einem Mismatch lebt: Zu hohe Belastung, fehlende echte Unterstützung, Konflikte mit den eigenen Werten oder fehlende Anerkennung jenseits von Leistung. Solange alles einigermaßen im Gleichgewicht ist, kann man oft noch viel aushalten. Kommen dann aber zusätzliche Dinge dazu – ein Verlust, eine schwere Krankheit, ein Konflikt oder einfach die Summe der Jahre –, dann reicht die Kapazität plötzlich nicht mehr aus. Dinge, die man früher noch bewältigen konnte, werden jetzt zu viel. Der Körper reagiert mit tiefer Erschöpfung, weil er die Überforderung nicht mehr anders regulieren kann. Diese Signale sind wichtig. Sie zeigen, dass die Belastung die verfügbaren Ressourcen überschritten hat.
+            </p>
+        </div>
+
+        <!-- Jesus-Stuhl Hinweis -->
+        <div class="bg-amber-50 border border-amber-200 rounded-3xl p-6 mb-10">
+            <div class="flex gap-x-4">
+                <div class="flex-shrink-0">
+                    <i class="fa-solid fa-chair text-amber-600 text-2xl mt-1"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-amber-800 mb-1">Der Jesus-Stuhl als Schlüssel</p>
+                    <p class="text-amber-700 text-sm">
+                        Gerade weil diese inneren Antreiber so stark sind, fällt es vielen schwer, rechtzeitig auf diese Signale zu hören. 
+                        Im Jesus-Stuhl kann man den Antreiber bewusst zu Wort kommen lassen und dann hören, was Jesus dazu sagt.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 mb-6 flex items-center gap-x-3">
+                <span>Ein Beispiel-Dialog im Jesus-Stuhl</span>
+            </h2>
+            
+            <!-- Antreiber -->
+            <div class="mb-8">
+                <div class="flex items-center gap-x-3 mb-3">
+                    <div class="px-4 py-1.5 bg-red-100 text-red-700 rounded-2xl text-sm font-bold tracking-wide flex items-center gap-x-2">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>ANTREIBER</span>
+                    </div>
+                </div>
+                <div class="dialogue-box bg-red-50 border border-red-200 rounded-3xl p-7 text-red-900">
+                    <p class="italic leading-relaxed">
+                        „Du musst jetzt weitermachen. Wenn du nachgibst und weniger tust, dann lässt du die anderen im Stich. Gott hat dir Kraft gegeben – und du verschwendest sie gerade. Das ist egoistisch. Die Gemeinde braucht dich. Wenn du jetzt ruhst, zeigst du, dass du nicht wirklich hingibst. Jesus wird dich schon stärken, wenn du nur genug durchhältst.“
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Jesus -->
+            <div>
+                <div class="flex items-center gap-x-3 mb-3">
+                    <div class="px-4 py-1.5 bg-emerald-100 text-emerald-700 rounded-2xl text-sm font-bold tracking-wide flex items-center gap-x-2">
+                        <i class="fa-solid fa-cross"></i>
+                        <span>JESUS</span>
+                    </div>
+                </div>
+                <div class="dialogue-box bg-emerald-50 border border-emerald-200 rounded-3xl p-7 text-emerald-900">
+                    <p class="italic leading-relaxed">
+                        „Ich sehe deine Erschöpfung. Du darfst jetzt wirklich weniger machen. Das ist kein Verrat an mir. Ich habe dich nicht gerufen, damit du dich aufbrauchst. Ich lade dich ein, zu mir zu kommen, weil du müde bist. Dein Wert hängt nicht davon ab, wie viel du leistest. Auch wenn du weniger kannst als früher, bist du bei mir willkommen. Meine Kraft wird in deiner Schwachheit vollkommen.“
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weitere Erklärung -->
+        <div class="content-text space-y-6">
+            <p>
+                Dieser Dialog muss oft mehrfach geführt werden, bis die alten Antreiber an Macht verlieren. Wichtig dabei ist, dass man seine Anerkennung nicht von den Menschen oder von der eigenen Leistung holt. Man kann die Bestätigung und das Wohlgefallen direkt bei Jesus suchen und empfangen – auch dann, wenn die Umgebung dafür keine Anerkennung gibt. Gerade wenn man weniger leistet, darf man bei Jesus bleiben und von ihm hören, dass man auch in dieser Phase wertvoll und willkommen ist.
+            </p>
+            
+            <p>
+                Denn es gehört zum Glauben, bei Jesus zu bleiben, wenn man nicht mehr so viel kann wie früher – und die Erlaubnis zum Runtersteigen von ihm anzunehmen, auch ohne Bestätigung von außen.
+            </p>
+        </div>
+
+        <!-- Abschluss-Box -->
+        <div class="mt-12 bg-white border border-amber-200 rounded-3xl p-8 shadow-sm">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-1">
+                    <h3 class="font-bold text-xl text-amber-900 mb-2">Dein nächster Schritt</h3>
+                    <p class="text-amber-700">
+                        Nimm dir Zeit für den Jesus-Stuhl. Lass den Antreiber zu Wort kommen und höre, was Jesus dir persönlich sagen möchte. 
+                        Du bist nicht allein in dieser Erschöpfung – Jesus lädt dich ein, zu ihm zu kommen.
+                    </p>
+                </div>
+                <div>
+                    <a href="jesus-stuhl.html" 
+                       class="inline-flex items-center justify-center gap-x-3 px-6 py-3.5 bg-amber-600 hover:bg-amber-700 transition-all text-white font-semibold rounded-3xl text-sm shadow-sm">
+                        <span>Jetzt den Jesus-Stuhl entdecken</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="index.html#hooks" 
+               class="inline-flex items-center gap-x-2 text-sm text-slate-500 hover:text-slate-700 transition-colors">
+                <i class="fa-solid fa-th-large"></i>
+                <span>Alle praktischen Einstiege ansehen</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-12">
+        <div class="max-w-4xl mx-auto px-6 text-center text-xs text-slate-500">
+            Dieser Inhalt ist Teil der Reihe „Verwandlung mit Jesus – Einfach erklärt“. 
+            Basierend auf biblischer Wahrheit und bewährten Erkenntnissen der inneren Heilung.<br>
+            <span class="mt-1 inline-block">© 2026 • Alle Rechte vorbehalten</span>
+        </div>
+    </footer>
+</body>
+</html>

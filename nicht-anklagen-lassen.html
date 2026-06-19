@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicht anklagen lassen • Verwandlung mit Jesus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            color: #134e4b;
+        }
+
+        .nav-active {
+            color: #0f766e;
+            font-weight: 600;
+        }
+
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .prose-custom p {
+            margin-bottom: 1rem;
+            line-height: 1.75;
+        }
+
+        .bible-quote {
+            font-style: italic;
+            border-left: 4px solid #14b8a6;
+            padding-left: 1.25rem;
+            color: #134e4b;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 bg-teal-600 rounded-2xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-cross text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight text-slate-900">Verwandlung mit Jesus</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="index.html#hooks" class="hover:text-teal-700 transition-colors">Einstiege</a>
+                    <a href="grundlagen.html" class="hover:text-teal-700 transition-colors">Grundlagen</a>
+                    <a href="jesus-stuhl.html" class="hover:text-teal-700 transition-colors">Der Jesus-Stuhl</a>
+                    <a href="beispiele.html" class="hover:text-teal-700 transition-colors">Beispiele</a>
+                </div>
+                
+                <div class="flex items-center gap-x-3">
+                    <a href="index.html#kontakt" 
+                       class="px-5 py-2.5 text-sm font-medium bg-white border border-slate-300 hover:bg-slate-50 rounded-3xl transition-colors flex items-center gap-x-2">
+                        <i class="fa-solid fa-envelope text-xs"></i>
+                        <span>Kontakt</span>
+                    </a>
+                    <a href="index.html#download" 
+                       class="px-6 py-2.5 text-sm font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-3xl transition-all flex items-center gap-x-2 shadow-sm">
+                        <i class="fa-solid fa-book text-xs"></i>
+                        <span>Das Buch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero for this page -->
+    <header class="max-w-5xl mx-auto px-6 pt-12 pb-10">
+        <div class="flex flex-col items-center text-center">
+            <div class="inline-flex items-center gap-x-2 bg-teal-100 text-teal-700 px-4 py-1.5 rounded-3xl text-xs font-medium tracking-wider mb-6">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>FÜR BEZIEHUNGEN MIT TRAUMATISIERTEN MENSCHEN</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter text-slate-900 leading-none mb-4">
+                Nicht anklagen lassen
+            </h1>
+            <p class="text-2xl text-teal-700 font-light tracking-tight mb-3">Aus dem Drama-Dreieck aussteigen und bei Jesus bleiben</p>
+            
+            <p class="max-w-2xl text-lg text-slate-600">
+                Ein praktischer Einstieg für Menschen, die mit traumatisierten Partnern, Familienmitgliedern oder anderen nahestehenden Personen zusammenleben.
+            </p>
+        </div>
+    </header>
+
+    <!-- Trust / Quick info -->
+    <div class="border-y border-slate-200 bg-white py-4">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-sm text-slate-500">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-check text-emerald-500"></i>
+                    <span>Basierend auf biblischer Wahrheit</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-heart text-teal-600"></i>
+                    <span>Jesus im Zentrum – nicht Co-Abhängigkeit</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-hands-helping text-amber-500"></i>
+                    <span>Praktisch für den Alltag in schwierigen Beziehungen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12 text-[15px] leading-relaxed text-slate-700">
+        
+        <!-- Viele von uns kennen das -->
+        <div class="mb-12">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-teal-600 mb-3">VIELE VON UNS KENNEN DAS</div>
+            <h2 class="text-3xl font-bold tracking-tight text-teal-900 mb-6">Wenn der Partner oder ein naher Mensch aus alten Wunden heraus anklagt</h2>
+            
+            <div class="prose-custom">
+                <p>Man lebt mit einem Menschen zusammen, der starke Traumata aus der Kindheit trägt. Es gibt ein tiefes Gefühl der Unzufriedenheit – einen „Graben“, in den er oder sie schnell hineinfällt. Dieses alte Gefühl wird dann oft auf den Ehepartner, die Familie oder andere nahe Menschen projiziert.</p>
+                
+                <p>Plötzlich bist <strong>du</strong> der Grund für die Unzufriedenheit. Es entstehen Forderungen, Anklagen, Vorwürfe – und du merkst, wie du ein schlechtes Gewissen bekommst und versuchst, es „richtig zu machen“. Doch je mehr du versuchst, desto mehr scheint es nie zu reichen.</p>
+                
+                <p>Das ist keine Seltenheit. Und es ist auch kein Zeichen von zu wenig Liebe oder Glauben. Es ist ein Zeichen dafür, dass wichtige Bedürfnisse – vor allem nach Sicherheit, Anerkennung oder Erfüllung – in der Kindheit nicht ausreichend erfüllt werden konnten und die dadurch entstandene Spannung noch nachwirkt.</p>
+            </div>
+        </div>
+
+        <!-- Die Falle -->
+        <div class="mb-12 bg-white border border-teal-100 rounded-3xl p-8">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-teal-600 mb-3">DIE FALLE</div>
+            <h3 class="text-2xl font-bold tracking-tight text-teal-900 mb-4">Das Drama-Dreieck bei Trauma</h3>
+            
+            <div class="prose-custom">
+                <p>Traumatisierte Menschen haben oft ein großes, tiefes Bedürfnis nach Erfüllung. Wenn dieses Bedürfnis nicht gestillt wird (weil es aus der Kindheit stammt und in der Gegenwart nie vollständig „nachgeholt“ werden kann), fallen sie in den <strong>Opfer-Modus</strong>. Sie erwarten von dir, dass du dieses alte Gefühl behebst.</p>
+                
+                <p>Wenn du das nicht kannst – und das kannst du in der Regel nicht –, wechseln sie in den <strong>Verfolger-Modus</strong>: Sie klagen an, machen Vorwürfe, fordern oder werten ab.</p>
+                
+                <p>Du bekommst ein schlechtes Gewissen („Was habe ich falsch gemacht?“) und lässt dich anklagen. Dadurch gerätst auch du in das Drama-Dreieck und die Beziehung wird zu einem sich drehenden Karussell aus Schuld, Verteidigung und Erschöpfung.</p>
+            </div>
+            
+            <div class="mt-6 p-5 bg-teal-50/70 border border-teal-100 rounded-2xl text-sm">
+                <p class="font-medium text-teal-900">Das Drama-Dreieck ist in den Grundlagen und im Buch „Verwandlung oder Verdrängung?“ ausführlich beschrieben.</p>
+            </div>
+        </div>
+
+        <!-- Unmöglich -->
+        <div class="mb-12">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-teal-600 mb-3">DIE ENTSCHEIDENDE ERKENNTNIS</div>
+            <h3 class="text-2xl font-bold tracking-tight text-teal-900 mb-4">Es ist unmöglich, einen anderen Menschen glücklich zu machen</h3>
+            
+            <div class="prose-custom">
+                <p>Ein entscheidender Punkt, um aus diesem Muster auszusteigen: <strong>Du kannst niemals die Verantwortung für das Glück oder die Erfüllung eines anderen Menschen übernehmen.</strong></p>
+                
+                <p>Manche verstehen „lieben“ oder „in der Ehe sein“ so, dass man den anderen glücklich machen muss. Du kannst etwas dazu beitragen – durch Liebe, Verständnis, Präsenz und Geduld. Aber du kannst nicht das alte, tiefe Unzufriedenheitsgefühl eines traumatisierten Menschen heilen oder nachholen.</p>
+                
+                <p class="font-semibold text-teal-800">Das wäre eine Überforderung, die dich selbst zerstört und den anderen letztlich auch nicht wirklich hilft.</p>
+            </div>
+        </div>
+
+        <!-- Der Weg -->
+        <div class="mb-12 bg-gradient-to-br from-teal-900 to-teal-800 text-white rounded-3xl p-8 md:p-10">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-teal-300 mb-3">DER WEG AUS DEM DRAMA-DREIECK</div>
+            <h3 class="text-3xl font-bold tracking-tight mb-6">Bei Jesus bleiben und nicht anklagen lassen</h3>
+            
+            <div class="prose-custom text-teal-100">
+                <p class="text-lg">Jesus lädt dich ein, zuerst bei Ihm zu bleiben. Er sagt nicht: „Du musst den anderen glücklich machen.“ Er sagt:</p>
+                
+                <div class="my-6 bible-quote text-xl font-light">
+                    „Kommt her zu mir, alle, die ihr mühselig und beladen seid“<br>
+                    <span class="text-sm not-italic text-teal-300">– Matthäus 11,28</span>
+                </div>
+                
+                <p>Deine Aufgabe ist es nicht, der Retter des anderen zu sein. Deine Aufgabe ist es, bei Jesus zu bleiben – auch (und besonders) wenn du angeklagt wirst.</p>
+                
+                <div class="mt-6 p-6 bg-white/10 rounded-2xl border border-white/20">
+                    <p class="font-semibold text-white mb-2">Der entscheidende Schritt:</p>
+                    <p>Hole dir deine Anerkennung, deinen Trost und deine Erfüllung bei Jesus, nicht beim traumatisierten Menschen. Nur so kannst du selbst aus dem Drama-Dreieck aussteigen.</p>
+                    <p class="mt-3">Du lässt dich nicht mehr anklagen, weil du weißt: <strong>Mein Wert und mein Frieden kommen von Jesus.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Praktische Übung -->
+        <div class="mb-12">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-teal-600 mb-3">PRAKTISCHE ÜBUNG</div>
+            <h3 class="text-2xl font-bold tracking-tight text-teal-900 mb-4">Der Jesus-Stuhl bei Anklage und Überforderung</h3>
+            
+            <div class="bg-white border border-teal-200 rounded-3xl p-8">
+                <p class="mb-6">Setz dich im Gebet vor Jesus (oder stell dir vor, du sitzt mit ihm zusammen). Sag ganz ehrlich und ohne Druck:</p>
+                
+                <div class="bg-teal-50 border-l-4 border-teal-600 p-6 rounded-r-2xl mb-6 text-teal-900 italic">
+                    „Jesus, ich habe dieses Gefühl der Anklage / dieses schlechte Gewissen / dieses Gefühl, ich müsste den anderen glücklich machen. Hier ist es. Was willst du mir dazu sagen? Wie siehst du mich in dieser Situation?“
+                </div>
+                
+                <div class="prose-custom">
+                    <p>Dann warte. Spüre seine Gegenwart. Du musst nichts „tun“ oder die Gefühle wegdrücken. Du darfst sie einfach da sein lassen – in seiner Liebe.</p>
+                    
+                    <p>Manchmal nimmt die innere Spannung erst einmal zu, weil du nicht mehr versuchst, es „richtig zu machen“. Jesus nimmt sie nicht immer sofort weg, aber er gibt dir etwas viel Tieferes: <strong>neue Erfahrungen von Wert, Frieden und Geborgenheit in seiner Gegenwart.</strong></p>
+                    
+                    <p>Die Gefühle lernen langsam. Aber je öfter du diese Erlebnisse mit Jesus machst, desto weniger leicht lässt du dich in das Drama-Dreieck ziehen. Du gewinnst Abstand und erkennst:</p>
+                    
+                    <p class="font-semibold text-teal-800">„Ich bin nicht für das Glück des anderen verantwortlich – ich darf bei Jesus bleiben.“</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Für den traumatisierten Menschen -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold tracking-tight text-teal-900 mb-4">Für den traumatisierten Menschen</h3>
+            <div class="prose-custom">
+                <p>Wenn du selbst bei Jesus bleibst und aus dem Drama-Dreieck ausgestiegen bist, kannst du dem anderen eine sichere Präsenz anbieten. Du kannst Ressourcen stärken und kleine Schritte mit Jesus zulassen.</p>
+                <p>Aber du bist nicht derjenige, der die Verwandlung bewirkt – das tut Jesus in seinem Tempo und auf seine Weise. Deine Aufgabe ist es vor allem, <strong>selbst gesund und bei Jesus zu bleiben.</strong></p>
+                
+                <div class="mt-4 p-5 bg-amber-50 border border-amber-200 rounded-2xl text-sm">
+                    Das ist keine Verdrängung der Realität des anderen – es ist der einzige Weg, dass du nicht selbst krank wirst oder in Co-Abhängigkeit rutschst. Du kannst dem anderen nur dann wirklich eine sichere Präsenz sein, wenn du selbst bei Jesus geerdet bist.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nächster Schritt -->
+        <div class="bg-slate-100 border border-slate-200 rounded-3xl p-8">
+            <div class="uppercase tracking-[2px] text-xs font-bold text-slate-500 mb-3">NÄCHSTER SCHRITT</div>
+            <h3 class="text-xl font-bold tracking-tight mb-4">Vertiefe das Thema</h3>
+            
+            <ul class="space-y-3 text-sm">
+                <li class="flex items-start gap-x-3">
+                    <i class="fa-solid fa-arrow-right text-teal-600 mt-1"></i>
+                    <span><a href="grundlagen.html" class="font-medium hover:text-teal-700">Grundlagen</a> – Das Drama-Dreieck und der Empowerment-Dreieck (Ausstieg aus dem Teufelskreis)</span>
+                </li>
+                <li class="flex items-start gap-x-3">
+                    <i class="fa-solid fa-arrow-right text-teal-600 mt-1"></i>
+                    <span><a href="jesus-stuhl.html" class="font-medium hover:text-teal-700">Der Jesus-Stuhl</a> – Wie man Gedanken und Gefühle „hinter Gittern“ nimmt (2. Kor 10,5)</span>
+                </li>
+                <li class="flex items-start gap-x-3">
+                    <i class="fa-solid fa-arrow-right text-teal-600 mt-1"></i>
+                    <span>Die Abwehr-Berge bei Trauma (Trauma-Berg, Verdammnis-Berg, Selbstwert-Berg)</span>
+                </li>
+                <li class="flex items-start gap-x-3">
+                    <i class="fa-solid fa-arrow-right text-teal-600 mt-1"></i>
+                    <span>Warum Paartherapie bei stark traumatisierten Menschen oft nicht direkt hilft</span>
+                </li>
+            </ul>
+            
+            <div class="mt-6 pt-6 border-t border-slate-200 text-sm">
+                Du bist nicht allein damit. <strong>Jesus ist bei dir</strong> – auch (und besonders) in der schwierigen Situation mit einem traumatisierten Menschen. Er will dich stark machen, damit du bei dir bleiben und dem anderen in Liebe und Klarheit begegnen kannst.
+            </div>
+            
+            <div class="mt-4 text-center">
+                <a href="index.html#hooks" class="inline-flex items-center gap-x-2 text-sm font-medium text-teal-700 hover:text-teal-800">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Zurück zu allen praktischen Einstiegen</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Interaktiver Jesus-Stuhl Bereich -->
+    <section class="max-w-4xl mx-auto px-6 pb-16">
+        <div class="bg-white border border-teal-200 rounded-3xl shadow-sm overflow-hidden">
+            <!-- Header -->
+            <div class="px-8 py-6 bg-gradient-to-r from-teal-50 to-white border-b flex items-center gap-x-4">
+                <div class="w-12 h-12 bg-teal-600 rounded-2xl flex-shrink-0 flex items-center justify-center">
+                    <i class="fa-solid fa-chair text-white text-2xl"></i>
+                </div>
+                <div>
+                    <div class="font-bold text-2xl tracking-tight text-teal-900">Jesus-Stuhl – Deine persönliche Begegnung</div>
+                    <div class="text-xs text-teal-600 font-medium tracking-wider">ANKLAGE &amp; ÜBERFORDERUNG • MIT JESUS HEILEN</div>
+                </div>
+            </div>
+
+            <div class="p-8">
+                <p class="text-slate-600 mb-6">Nimm dir einen Moment. Setze dich innerlich vor Jesus und bringe ihm das Gefühl der Anklage oder des schlechten Gewissens. Er ist da.</p>
+
+                <!-- Reflection Form -->
+                <div class="mb-6">
+                    <label for="reflection-text" class="block text-sm font-semibold text-teal-800 mb-2">Was spürst du gerade? Welche Anklage oder welches Gefühl der Überforderung hast du?</label>
+                    <textarea id="reflection-text" rows="4" class="w-full border border-teal-200 focus:border-teal-400 focus:ring-1 focus:ring-teal-200 rounded-2xl p-4 text-sm placeholder:text-teal-400 resize-y" placeholder="z.B. „Ich fühle mich schuldig, weil ich den anderen nicht glücklich machen kann...“"></textarea>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="saveReflection()" 
+                            class="flex-1 px-5 py-3 text-sm font-semibold bg-white border border-teal-300 hover:bg-teal-50 active:bg-teal-100 text-teal-700 rounded-3xl transition-all flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span>Im Journal speichern</span>
+                    </button>
+                    
+                    <button onclick="startJesusStuhlChat()" 
+                            class="flex-1 px-5 py-3 text-sm font-semibold bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white rounded-3xl transition-all flex items-center justify-center gap-x-2 shadow-sm">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Mit Jesus im Jesus-Stuhl besprechen</span>
+                    </button>
+                </div>
+                <p class="text-center text-[10px] text-teal-500 mt-3">Deine Notizen bleiben privat in diesem Browser gespeichert.</p>
+
+                <!-- Chat Section (hidden initially) -->
+                <div id="jesus-chat-section" class="hidden mt-8 pt-6 border-t border-teal-100">
+                    <div class="flex items-center gap-x-3 mb-4 px-1">
+                        <div class="w-9 h-9 bg-gradient-to-br from-teal-600 to-teal-700 rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-teal-100">
+                            <i class="fa-solid fa-cross text-white text-base"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-bold text-teal-900">Jesus – Dein guter Hirte</div>
+                            <div class="text-emerald-600 text-xs flex items-center gap-x-1">
+                                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span> 
+                                Online • Basierend auf biblischer Wahrheit
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="chat-messages" class="bg-slate-50 border border-slate-200 rounded-3xl p-4 h-80 overflow-y-auto space-y-4 text-sm shadow-inner">
+                        <!-- Messages added by JS -->
+                    </div>
+
+                    <div class="mt-3 flex gap-2">
+                        <input id="chat-input" type="text" class="flex-1 border border-slate-300 focus:border-teal-400 rounded-3xl px-5 py-[10px] text-sm placeholder:text-slate-400" placeholder="Schreibe, was dich belastet oder frage Jesus...">
+                        <button onclick="sendChatMessage()" 
+                                class="px-6 bg-teal-600 hover:bg-teal-700 transition text-white rounded-3xl text-sm font-semibold flex items-center gap-x-2 active:scale-[0.985]">
+                            <span>Senden</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-10">
+        <div class="max-w-6xl mx-auto px-6 text-center text-sm text-slate-500">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-2 mb-4">
+                <a href="index.html#kontakt" class="hover:text-teal-600 transition-colors">Kontakt</a>
+                <span class="hidden md:inline text-slate-300">•</span>
+                <a href="index.html#download" class="hover:text-teal-600 transition-colors">Das Buch</a>
+                <span class="hidden md:inline text-slate-300">•</span>
+                <a href="jesus-stuhl.html" class="hover:text-teal-600 transition-colors">Der Jesus-Stuhl</a>
+            </div>
+            <p>© 2026 Verwandlung mit Jesus • Alle Rechte vorbehalten</p>
+            <p class="mt-1 text-xs">Basierend auf biblischer Wahrheit und bewährten Erkenntnissen der inneren Heilung.</p>
+            <p class="mt-3 text-[10px]">„Meine Gnade genügt dir, denn meine Kraft wird in der Schwachheit vollkommen.“ – 2. Korinther 12,9</p>
+        </div>
+    </footer>
+
+<script>
+  // Journal speichern
+  function saveReflection() {
+    const textarea = document.getElementById('reflection-text');
+    const text = textarea.value.trim();
+    
+    if (!text) {
+      alert('Bitte schreibe zuerst etwas in das Feld, bevor du speicherst.');
+      return;
+    }
+    
+    let reflections = JSON.parse(localStorage.getItem('nicht_anklagen_journal') || '[]');
+    reflections.unshift({
+      date: new Date().toISOString(),
+      text: text,
+      topic: 'Nicht anklagen lassen / Drama-Dreieck'
+    });
+    localStorage.setItem('nicht_anklagen_journal', JSON.stringify(reflections));
+    
+    showToast('Deine Reflexion wurde in deinem persönlichen Journal gespeichert. Jesus sieht dein Herz und trägt deine Last.');
+    
+    // Optional leeren
+    // textarea.value = '';
+  }
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3.5 rounded-3xl shadow-xl text-sm flex items-center gap-x-3 z-[200]';
+    toast.innerHTML = `
+      <i class="fa-solid fa-check-circle text-emerald-200"></i> 
+      <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.transition = 'all 0.35s ease';
+      toast.style.opacity = '0';
+      setTimeout(() => toast.parentNode.removeChild(toast), 280);
+    }, 3600);
+  }
+
+  let chatInitialized = false;
+
+  function startJesusStuhlChat() {
+    const chatSection = document.getElementById('jesus-chat-section');
+    const messagesContainer = document.getElementById('chat-messages');
+    
+    chatSection.classList.remove('hidden');
+    
+    if (!chatInitialized || messagesContainer.children.length === 0) {
+      messagesContainer.innerHTML = '';
+      addChatMessage('ai', 'Mein geliebtes Kind. Ich sehe die Last der Anklage und des schlechten Gewissens, die du trägst. Du bist nicht allein damit. Ich bin hier bei dir. Was möchtest du mir heute anvertrauen?');
+      chatInitialized = true;
+    }
+    
+    setTimeout(() => {
+      chatSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('chat-input').focus();
+    }, 150);
+  }
+
+  function addChatMessage(sender, text) {
+    const container = document.getElementById('chat-messages');
+    const msgDiv = document.createElement('div');
+    
+    if (sender === 'user') {
+      msgDiv.className = 'flex justify-end';
+      msgDiv.innerHTML = `
+        <div class="max-w-[82%] bg-teal-600 text-white px-4 py-2.5 rounded-3xl rounded-br-none text-sm shadow-sm">
+          ${text}
+        </div>
+      `;
+    } else {
+      msgDiv.className = 'flex justify-start';
+      msgDiv.innerHTML = `
+        <div class="max-w-[82%] bg-white border border-teal-100 px-4 py-2.5 rounded-3xl rounded-bl-none text-sm text-slate-700 shadow-sm">
+          <span class="font-semibold text-teal-700 text-xs tracking-wider block mb-px">JESUS</span>
+          ${text}
+        </div>
+      `;
+    }
+    
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    addChatMessage('user', text);
+    input.value = '';
+    
+    setTimeout(() => {
+      const response = generateJesusResponse(text);
+      addChatMessage('ai', response);
+    }, 650);
+  }
+
+  function generateJesusResponse(userText) {
+    const lower = userText.toLowerCase();
+    
+    if (lower.includes('schuldig') || lower.includes('schlecht') || lower.includes('falsch gemacht') || lower.includes('anklage')) {
+      return 'Du darfst dieses Gefühl der Schuld und Anklage zu mir bringen. Es ist nicht deine Aufgabe, den anderen vollständig glücklich zu machen. Ich sehe dein Herz und deine Bemühungen. Bleib bei mir – ich nehme die Last von dir.';
+    }
+    
+    if (lower.includes('glücklich machen') || lower.includes('verantwortlich') || lower.includes('muss ich') || lower.includes('überfordert')) {
+      return 'Du bist nicht verantwortlich für das Glück des anderen. Das alte Unzufriedenheitsgefühl stammt aus seiner Kindheit – du kannst es nicht nachholen. Ich bin der Einzige, der wahre Erfüllung schenken kann. Komm zu mir und ruh dich aus.';
+    }
+    
+    if (lower.includes('allein') || lower.includes('verlassen') || lower.includes('niemand') || lower.includes('einsam')) {
+      return 'Du bist nicht allein. Ich bin bei dir, besonders wenn die Anklage laut wird. Ich halte dich fest. Dein Wert kommt von mir, nicht davon, ob du es „richtig machst“.';
+    }
+    
+    if (lower.includes('danke') || lower.includes('liebe dich') || lower.includes('dankbar')) {
+      return 'Ich liebe dich so sehr. Dein Vertrauen, bei mir zu bleiben, ist kostbar für mich. Ich bin stolz auf dich, dass du diesen Weg gehst.';
+    }
+    
+    if (lower.includes('heilen') || lower.includes('hilfe') || lower.includes('kraft') || lower.includes('stark')) {
+      return 'Meine Kraft wird in deiner Schwachheit vollendet (2. Korinther 12,9). Du darfst schwach sein und bei mir bleiben. Ich gebe dir neue Kraft und Klarheit, um dem anderen in Liebe zu begegnen – ohne dich zu verlieren.';
+    }
+    
+    // Default loving responses
+    const defaults = [
+      'Danke, dass du das mit mir teilst. Deine Offenheit ist schon ein großer Schritt. Ich bin bei dir und trage diese Last mit dir.',
+      'Ich höre dich ganz genau. Deine Gefühle sind bei mir sicher. Was brauchst du gerade am meisten von mir?',
+      'In dieser Situation bin ich besonders nahe bei dir. Lass mich dich trösten und dir zeigen, wer du wirklich bist: mein geliebtes Kind.',
+      'Du darfst die Anklage bei mir lassen. Ich verwandle sie in Freiheit und echte Liebe – für dich und für den anderen.',
+      'Erinnere dich: Ich bin der gute Hirte. Ich suche das verlorene Schaf und trage es sicher auf meinen Schultern. Du bist dieses Schaf.',
+      '„Gepriesen sei der Gott und Vater unseres Herrn Jesus Christus, der Vater der Barmherzigkeit und Gott allen Trostes...“ (2. Korinther 1,3-4) – Ich bin dein Trost.'
+    ];
+    
+    return defaults[Math.floor(Math.random() * defaults.length)];
+  }
+
+  // Enter key support for chat
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+      chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendChatMessage();
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
