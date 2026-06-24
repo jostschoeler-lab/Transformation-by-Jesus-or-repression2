@@ -185,6 +185,23 @@
         function getAbsoluteUrl(path) {
             return new URL(path, window.location.href).href;
         }
+
+        function truncateForGeminiUrl(text, maxLength) {
+            if (!text || text.length <= maxLength) return text || '';
+            return text.slice(0, maxLength) + '\n\n[Hintergrund gekürzt – der vollständige Kontext wurde zusätzlich in die Zwischenablage kopiert.]';
+        }
+        function buildGeminiUrlPrompt(backgroundContext) {
+            const { sprich, wahrnehmen } = collectGnadenthronDialogInputs();
+            const bookPdfUrl = getAbsoluteUrl('downloads/verwandlung-oder-verdraengung.pdf');
+            const backgroundTextUrl = getAbsoluteUrl('downloads/gemini-hintergrund.txt');
+            const siteUrl = getAbsoluteUrl('index.html');
+            const formatEntry = (value) => value || '[Keine Eingabe notiert]';
+            const compactBackground = truncateForGeminiUrl(backgroundContext, 7500);
+            return `Bitte nutze diesen aus dem Jesus-Stuhl übertragenen Kontext. Falls der Text gekürzt ist: Der vollständige Prompt liegt in meiner Zwischenablage und kann eingefügt werden.\n\nBuch-PDF: ${bookPdfUrl}\nHintergrundtext: ${backgroundTextUrl}\nStartseite: ${siteUrl}\n\nMeine Dialogeingaben:\n1. Was ich ausgesprochen habe:\n${formatEntry(sprich)}\n\n2. Wahrnehmung / Abschluss:\n${formatEntry(wahrnehmen)}\n\nGekürzter Hintergrund aus Webseite und Buch:\n${compactBackground}\n\nAufgabe: Reflektiere den Dialog ruhig, seelsorgerlich und nicht manipulativ. Sprich nicht als Jesus und simuliere Jesus nicht.`;
+        }
+        function getGeminiPromptUrl(prompt) {
+            return 'https://gemini.google.com/app?prompt=' + encodeURIComponent(prompt);
+        }
         async function loadGeminiBackgroundContext() {
             const contextUrl = 'downloads/gemini-hintergrund.txt';
             try {
@@ -244,24 +261,48 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
             if (!copied) throw new Error('Clipboard copy failed');
         }
         async function continueInGemini() {
-            const shortPrompt = 'Ich habe einen vollständigen Kontext-Prompt aus dem Jesus-Stuhl in der Zwischenablage. Bitte nutze nach dem Einfügen alle Hintergrunddaten, Webseiteninhalte, den PDF-Link bzw. Buchhinweis und meine beiden Dialogeingaben als Kontext.';
-            const geminiUrl = 'https://gemini.google.com/app?prompt=' + encodeURIComponent(shortPrompt);
-            const geminiWindow = window.open(geminiUrl, '_blank');
-
-            if (geminiWindow) {
-                geminiWindow.opener = null;
-            } else {
-                window.location.href = geminiUrl;
-                return;
+            const button = document.querySelector('button[onclick="continueInGemini()"]');
+            const originalButtonHtml = button ? button.innerHTML : '';
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Kontext wird vorbereitet …</span>';
             }
 
+            let transferWindow = null;
             try {
+                transferWindow = window.open('', '_blank');
+                if (transferWindow) {
+                    transferWindow.document.write('<!doctype html><title>Gemini-Kontext wird vorbereitet</title><body style="font-family:system-ui,sans-serif;padding:2rem;line-height:1.5"><h1>Gemini wird vorbereitet …</h1><p>Der Jesus-Stuhl-Kontext wird zusammengestellt und gleich an Gemini übergeben.</p></body>');
+                    transferWindow.opener = null;
+                }
+
+                const backgroundContext = await loadGeminiBackgroundContext();
                 const prompt = await buildGeminiPrompt();
-                await copyTextToClipboard(prompt);
-                showToast('Gemini wurde geöffnet. Der vollständige Kontext-Prompt wurde kopiert – fügen Sie ihn dort ein, falls er nicht automatisch übernommen wird.');
+                const urlPrompt = buildGeminiUrlPrompt(backgroundContext);
+                const geminiUrl = getGeminiPromptUrl(urlPrompt);
+
+                try {
+                    await copyTextToClipboard(prompt);
+                    showToast('Gemini wird geöffnet. Die wichtigsten Daten werden übergeben; der vollständige Kontext wurde zusätzlich kopiert.');
+                } catch (clipboardError) {
+                    console.warn('Prompt konnte nicht automatisch kopiert werden:', clipboardError);
+                    showToast('Gemini wird geöffnet. Die Dialogdaten und Buchlinks werden in der Adresse übergeben.');
+                }
+
+                if (transferWindow) {
+                    transferWindow.location.replace(geminiUrl);
+                } else {
+                    window.location.href = geminiUrl;
+                }
             } catch (error) {
-                console.error('Prompt konnte nicht vorbereitet oder kopiert werden:', error);
-                alert('Gemini wurde geöffnet, aber der vollständige Prompt konnte nicht automatisch kopiert werden. Bitte versuchen Sie es erneut oder kopieren Sie Ihre Eingaben manuell.');
+                console.error('Prompt konnte nicht vorbereitet werden:', error);
+                if (transferWindow && !transferWindow.closed) transferWindow.close();
+                alert('Der Kontext konnte nicht an Gemini übergeben werden. Bitte versuchen Sie es erneut oder öffnen Sie die PDF manuell.');
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                    button.innerHTML = originalButtonHtml;
+                }
             }
         }
         function initializePage() { initializeTailwind(); updateJournalPreview(); }
