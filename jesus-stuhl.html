@@ -86,11 +86,13 @@
                 <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button></div>
                 <div class="mt-6 rounded-3xl border border-amber-100 bg-amber-50/60 p-5">
                     <h3 class="font-semibold text-xl tracking-tight text-stone-900 mb-2">Möchten Sie diesen Dialog vertiefen?</h3>
-                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog wie in der Vertiefung manuell an ChatGPT oder Gemini übergeben. Diese Seite bereitet den Dialog, den App-Hintergrund, das Buch-PDF und einen sicheren Antwort-Prompt vor. Der Prompt wird kopiert; laden Sie die Dateien im neuen Chat selbst hoch und fügen Sie den Prompt ein.</p>
+                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog wie in der Vertiefung manuell an ChatGPT oder Gemini übergeben. Diese Seite bereitet den Dialog, die Inhalte der Internetseite, das Buch-PDF und einen sicheren Antwort-Prompt vor. Der Prompt kann kopiert oder heruntergeladen werden; laden Sie die Dateien im neuen Chat selbst hoch und fügen Sie den Prompt ein.</p>
                     <div class="grid sm:grid-cols-2 gap-3">
                         <button onclick="continueInAssistant('chatgpt')" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-comments"></i><span>In ChatGPT weiterarbeiten</span></button>
                         <button onclick="continueInAssistant('gemini')" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-sparkles"></i><span>In Gemini weiterarbeiten</span></button>
+                        <button onclick="copyDialogPrompt()" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-copy"></i><span>Dialog + Prompt kopieren</span></button>
                         <button onclick="downloadDialogPrompt()" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-arrow-down"></i><span>Dialog + Prompt herunterladen</span></button>
+                        <a href="downloads/webseiten-inhalte.txt" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-globe"></i><span>Webseiten-Inhalte herunterladen</span></a>
                         <a href="downloads/verwandlung-oder-verdraengung.pdf" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-pdf"></i><span>Buch-PDF herunterladen</span></a>
                         <a href="downloads/chatgpt-hintergrund.txt" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-lines"></i><span>ChatGPT-Hintergrund</span></a>
                         <a href="downloads/gemini-hintergrund.txt" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-lines"></i><span>Gemini-Hintergrund</span></a>
@@ -214,6 +216,7 @@
             const bookPdfUrl = getAbsoluteUrl('downloads/verwandlung-oder-verdraengung.pdf');
             const backgroundTextUrl = getAbsoluteUrl(config.backgroundPath);
             const siteUrl = getAbsoluteUrl('index.html');
+            const websiteContentUrl = getAbsoluteUrl('downloads/webseiten-inhalte.txt');
             const formatEntry = (value) => value || '[Keine Eingabe notiert]';
             return `Bitte hilf mir, meinen bisherigen Jesus-Stuhl-/Gnadenthron-Dialog ruhig, seelsorgerlich und nicht manipulativ weiter zu reflektieren.
 
@@ -224,6 +227,7 @@ Ich habe zusätzlich das Buch-PDF und den Hintergrundtext für ${config.name} be
 Buch-PDF: ${bookPdfUrl}
 Hintergrundtext: ${backgroundTextUrl}
 Startseite der Webfassung: ${siteUrl}
+Download der Webseiten-Inhalte: ${websiteContentUrl}
 
 ===== HINTERGRUNDKONTEXT AUS WEBSEITE UND BUCH =====
 ${backgroundContext}
@@ -269,6 +273,17 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
             const prompt = await buildAssistantPrompt('chatgpt');
             downloadTextFile('jesus-stuhl-dialog-und-prompt.txt', prompt);
             showToast('Dialog und Prompt wurden als Textdatei vorbereitet.');
+        }
+        async function copyDialogPrompt() {
+            const prompt = await buildAssistantPrompt('chatgpt');
+            try {
+                await copyTextToClipboard(prompt);
+                showToast('Dialog und Prompt wurden kopiert. Fügen Sie den Text in ChatGPT oder Gemini ein.');
+            } catch (error) {
+                console.warn('Dialog-Prompt konnte nicht kopiert werden:', error);
+                downloadTextFile('jesus-stuhl-dialog-und-prompt.txt', prompt);
+                showToast('Kopieren war nicht möglich. Dialog und Prompt wurden heruntergeladen.');
+            }
         }
         async function continueInAssistant(provider) {
             const config = getAssistantConfig(provider);
