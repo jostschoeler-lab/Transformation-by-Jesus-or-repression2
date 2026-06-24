@@ -86,7 +86,7 @@
                 <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button></div>
                 <div class="mt-6 rounded-3xl border border-amber-100 bg-amber-50/60 p-5">
                     <h3 class="font-semibold text-xl tracking-tight text-stone-900 mb-2">Möchten Sie diesen Dialog vertiefen?</h3>
-                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog zusammen mit dem Hintergrundwissen aus dem Buch in Gemini weiter besprechen und weitere Fragen stellen.</p>
+                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog direkt in Gemini weiter besprechen. Der Prompt wird kopiert und Gemini öffnet sich in einem neuen Tab.</p>
                     <button onclick="continueInGemini()" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Dialog in Gemini vertiefen</span></button>
                 </div>
                 <p class="text-center text-xs text-stone-400 mt-4">Deine Einträge bleiben privat in diesem Browser gespeichert.</p>
@@ -215,15 +215,23 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
         }
         async function continueInGemini() {
             const prompt = buildGeminiPrompt();
+            const geminiUrl = 'https://gemini.google.com/app?prompt=' + encodeURIComponent(prompt);
+            const geminiWindow = window.open('about:blank', '_blank', 'noopener,noreferrer');
+
             try {
                 await copyTextToClipboard(prompt);
-                showToast('Der Prompt wurde kopiert. Öffnen Sie Gemini, laden Sie bei Bedarf das Buch hoch und fügen Sie den Prompt ein.');
+                showToast('Der Prompt wurde kopiert. Gemini wird jetzt geöffnet. Fügen Sie den Prompt dort ein, falls er nicht automatisch übernommen wird.');
             } catch (error) {
                 console.error('Prompt konnte nicht kopiert werden:', error);
                 alert('Der Prompt konnte nicht automatisch kopiert werden. Bitte kopieren Sie ihn manuell aus dem nächsten Hinweis.');
                 window.prompt('Prompt für Gemini kopieren:', prompt);
             }
-            window.open('https://gemini.google.com', '_blank', 'noopener,noreferrer');
+
+            if (geminiWindow) {
+                geminiWindow.location.href = geminiUrl;
+            } else {
+                window.location.href = geminiUrl;
+            }
         }
         function initializePage() { initializeTailwind(); updateJournalPreview(); }
         window.addEventListener('beforeunload', () => { if (recognition && isListening) { try { recognition.stop(); } catch (e) {} } });
