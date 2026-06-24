@@ -86,12 +86,16 @@
                 <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button></div>
                 <div class="mt-6 rounded-3xl border border-amber-100 bg-amber-50/60 p-5">
                     <h3 class="font-semibold text-xl tracking-tight text-stone-900 mb-2">Möchten Sie diesen Dialog vertiefen?</h3>
-                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog direkt in Gemini weiter besprechen. Die beiden Eingaben, die Webseiteninhalte und der öffentliche PDF-Link zum Buch werden als Kontext in den Prompt kopiert; Gemini öffnet sich danach in einem neuen Tab. Falls Gemini die PDF nicht automatisch liest, kann sie über den Link unten manuell geöffnet oder in Gemini hochgeladen werden.</p>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="continueInGemini()" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Dialog in Gemini vertiefen</span></button>
-                        <a href="downloads/verwandlung-oder-verdraengung.pdf" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-pdf"></i><span>Buch-PDF öffnen</span></a>
+                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog wie in der Vertiefung manuell an ChatGPT oder Gemini übergeben. Diese Seite bereitet den Dialog, den App-Hintergrund, das Buch-PDF und einen sicheren Antwort-Prompt vor. Der Prompt wird kopiert; laden Sie die Dateien im neuen Chat selbst hoch und fügen Sie den Prompt ein.</p>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <button onclick="continueInAssistant('chatgpt')" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-comments"></i><span>In ChatGPT weiterarbeiten</span></button>
+                        <button onclick="continueInAssistant('gemini')" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-sparkles"></i><span>In Gemini weiterarbeiten</span></button>
+                        <button onclick="downloadDialogPrompt()" class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-arrow-down"></i><span>Dialog + Prompt herunterladen</span></button>
+                        <a href="downloads/verwandlung-oder-verdraengung.pdf" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-pdf"></i><span>Buch-PDF herunterladen</span></a>
+                        <a href="downloads/chatgpt-hintergrund.txt" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-lines"></i><span>ChatGPT-Hintergrund</span></a>
+                        <a href="downloads/gemini-hintergrund.txt" download class="w-full inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-lines"></i><span>Gemini-Hintergrund</span></a>
                     </div>
-                    <p class="text-xs leading-5 text-amber-800/80 mt-3">Hinweis: Browser dürfen Gemini keine Datei heimlich übertragen. Diese Seite kopiert deshalb den vollständigen Kontext und den direkten PDF-Link. Öffnen Sie bei Bedarf das PDF und laden Sie es in Gemini manuell hoch.</p>
+                    <p class="text-xs leading-5 text-amber-800/80 mt-3">Hinweis: Browser dürfen ChatGPT oder Gemini keine Dateien heimlich übertragen. Öffnen Sie den gewünschten Dienst, laden Sie PDF und Hintergrunddatei manuell hoch und fügen Sie den kopierten Prompt ein.</p>
                 </div>
                 <p class="text-center text-xs text-stone-400 mt-4">Deine Einträge bleiben privat in diesem Browser gespeichert.</p>
             </div></div>
@@ -186,48 +190,39 @@
             return new URL(path, window.location.href).href;
         }
 
-        function truncateForGeminiUrl(text, maxLength) {
-            if (!text || text.length <= maxLength) return text || '';
-            return text.slice(0, maxLength) + '\n\n[Hintergrund gekürzt – der vollständige Kontext wurde zusätzlich in die Zwischenablage kopiert.]';
+        function getAssistantConfig(provider) {
+            if (provider === 'chatgpt') {
+                return { name: 'ChatGPT', url: 'https://chatgpt.com/', backgroundPath: 'downloads/chatgpt-hintergrund.txt' };
+            }
+            return { name: 'Gemini', url: 'https://gemini.google.com/app', backgroundPath: 'downloads/gemini-hintergrund.txt' };
         }
-        function buildGeminiUrlPrompt(backgroundContext) {
-            const { sprich, wahrnehmen } = collectGnadenthronDialogInputs();
-            const bookPdfUrl = getAbsoluteUrl('downloads/verwandlung-oder-verdraengung.pdf');
-            const backgroundTextUrl = getAbsoluteUrl('downloads/gemini-hintergrund.txt');
-            const siteUrl = getAbsoluteUrl('index.html');
-            const formatEntry = (value) => value || '[Keine Eingabe notiert]';
-            const compactBackground = truncateForGeminiUrl(backgroundContext, 7500);
-            return `Bitte nutze diesen aus dem Jesus-Stuhl übertragenen Kontext. Falls der Text gekürzt ist: Der vollständige Prompt liegt in meiner Zwischenablage und kann eingefügt werden.\n\nBuch-PDF: ${bookPdfUrl}\nHintergrundtext: ${backgroundTextUrl}\nStartseite: ${siteUrl}\n\nMeine Dialogeingaben:\n1. Was ich ausgesprochen habe:\n${formatEntry(sprich)}\n\n2. Wahrnehmung / Abschluss:\n${formatEntry(wahrnehmen)}\n\nGekürzter Hintergrund aus Webseite und Buch:\n${compactBackground}\n\nAufgabe: Reflektiere den Dialog ruhig, seelsorgerlich und nicht manipulativ. Sprich nicht als Jesus und simuliere Jesus nicht.`;
-        }
-        function getGeminiPromptUrl(prompt) {
-            return 'https://gemini.google.com/app?prompt=' + encodeURIComponent(prompt);
-        }
-        async function loadGeminiBackgroundContext() {
-            const contextUrl = 'downloads/gemini-hintergrund.txt';
+        async function loadAssistantBackgroundContext(provider) {
+            const config = getAssistantConfig(provider);
             try {
-                const response = await fetch(contextUrl, { cache: 'no-store' });
+                const response = await fetch(config.backgroundPath, { cache: 'no-store' });
                 if (!response.ok) throw new Error(`Kontextdatei konnte nicht geladen werden: ${response.status}`);
                 return await response.text();
             } catch (error) {
-                console.error('Gemini-Hintergrund konnte nicht geladen werden:', error);
-                return `HINTERGRUND-HINWEIS: Die Webseite stellt die Kontextdatei ${contextUrl} bereit. Bitte nutze außerdem das Buch „Verwandlung oder Verdrängung?“ aus downloads/verwandlung-oder-verdraengung.pdf sowie die Inhalte der Webseite „Verwandlung mit Jesus statt Verdrängung“ als Hintergrund.`;
+                console.error(`${config.name}-Hintergrund konnte nicht geladen werden:`, error);
+                return `HINTERGRUND-HINWEIS: Die Webseite stellt die Kontextdatei ${config.backgroundPath} bereit. Bitte nutze außerdem das Buch „Verwandlung oder Verdrängung?“ aus downloads/verwandlung-oder-verdraengung.pdf sowie die Inhalte der Webseite „Verwandlung mit Jesus statt Verdrängung“ als Hintergrund.`;
             }
         }
-        async function buildGeminiPrompt() {
+        async function buildAssistantPrompt(provider = 'gemini') {
+            const config = getAssistantConfig(provider);
             const { sprich, wahrnehmen } = collectGnadenthronDialogInputs();
-            const backgroundContext = await loadGeminiBackgroundContext();
+            const backgroundContext = await loadAssistantBackgroundContext(provider);
             const bookPdfUrl = getAbsoluteUrl('downloads/verwandlung-oder-verdraengung.pdf');
-            const backgroundTextUrl = getAbsoluteUrl('downloads/gemini-hintergrund.txt');
+            const backgroundTextUrl = getAbsoluteUrl(config.backgroundPath);
             const siteUrl = getAbsoluteUrl('index.html');
             const formatEntry = (value) => value || '[Keine Eingabe notiert]';
             return `Bitte hilf mir, meinen bisherigen Jesus-Stuhl-/Gnadenthron-Dialog ruhig, seelsorgerlich und nicht manipulativ weiter zu reflektieren.
 
 Wichtig: Sprich bitte nicht als Jesus und simuliere Jesus nicht. Antworte stattdessen als achtsame, unterstützende Reflexionshilfe mit christlichem Hintergrund. Stelle behutsame Fragen, fasse mögliche Themen zusammen und achte darauf, keine vorschnellen Deutungen oder Druck aufzubauen.
 
-Nutze den folgenden Hintergrund aus der Webseite, den Grundgedanken, Modellen und dem Buch „Verwandlung oder Verdrängung?“ als Kontext. Die persönlichen Dialogeingaben stehen danach und sollen im Mittelpunkt bleiben.
+Ich habe zusätzlich das Buch-PDF und den Hintergrundtext für ${config.name} bereitgestellt. Nutze diese Dateien als Kontext; meine persönlichen Dialogeingaben stehen danach und sollen im Mittelpunkt bleiben.
 
-Wichtig zur Dateiübernahme: Das vollständige Buch-PDF ist öffentlich hier erreichbar: ${bookPdfUrl}
-Falls du den PDF-Link nicht selbst abrufen kannst, bitte mich ausdrücklich, die PDF-Datei in Gemini hochzuladen. Der komprimierte Hintergrundtext steht hier: ${backgroundTextUrl}
+Buch-PDF: ${bookPdfUrl}
+Hintergrundtext: ${backgroundTextUrl}
 Startseite der Webfassung: ${siteUrl}
 
 ===== HINTERGRUNDKONTEXT AUS WEBSEITE UND BUCH =====
@@ -260,44 +255,43 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
             textarea.remove();
             if (!copied) throw new Error('Clipboard copy failed');
         }
-        async function continueInGemini() {
-            const button = document.querySelector('button[onclick="continueInGemini()"]');
+        function downloadTextFile(filename, text) {
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(link.href);
+            link.remove();
+        }
+        async function downloadDialogPrompt() {
+            const prompt = await buildAssistantPrompt('chatgpt');
+            downloadTextFile('jesus-stuhl-dialog-und-prompt.txt', prompt);
+            showToast('Dialog und Prompt wurden als Textdatei vorbereitet.');
+        }
+        async function continueInAssistant(provider) {
+            const config = getAssistantConfig(provider);
+            const button = document.querySelector(`button[onclick="continueInAssistant('${provider}')"]`);
             const originalButtonHtml = button ? button.innerHTML : '';
             if (button) {
                 button.disabled = true;
-                button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Kontext wird vorbereitet …</span>';
+                button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Prompt wird kopiert …</span>';
             }
-
-            let transferWindow = null;
             try {
-                transferWindow = window.open('', '_blank');
-                if (transferWindow) {
-                    transferWindow.document.write('<!doctype html><title>Gemini-Kontext wird vorbereitet</title><body style="font-family:system-ui,sans-serif;padding:2rem;line-height:1.5"><h1>Gemini wird vorbereitet …</h1><p>Der Jesus-Stuhl-Kontext wird zusammengestellt und gleich an Gemini übergeben.</p></body>');
-                    transferWindow.opener = null;
-                }
-
-                const backgroundContext = await loadGeminiBackgroundContext();
-                const prompt = await buildGeminiPrompt();
-                const urlPrompt = buildGeminiUrlPrompt(backgroundContext);
-                const geminiUrl = getGeminiPromptUrl(urlPrompt);
-
+                const prompt = await buildAssistantPrompt(provider);
                 try {
                     await copyTextToClipboard(prompt);
-                    showToast('Gemini wird geöffnet. Die wichtigsten Daten werden übergeben; der vollständige Kontext wurde zusätzlich kopiert.');
+                    showToast(`${config.name} wird geöffnet. Fügen Sie dort den kopierten Prompt ein und laden Sie PDF und Hintergrunddatei hoch.`);
                 } catch (clipboardError) {
                     console.warn('Prompt konnte nicht automatisch kopiert werden:', clipboardError);
-                    showToast('Gemini wird geöffnet. Die Dialogdaten und Buchlinks werden in der Adresse übergeben.');
+                    downloadTextFile('jesus-stuhl-dialog-und-prompt.txt', prompt);
+                    showToast(`Prompt wurde stattdessen heruntergeladen. Öffnen Sie nun ${config.name}.`);
                 }
-
-                if (transferWindow) {
-                    transferWindow.location.replace(geminiUrl);
-                } else {
-                    window.location.href = geminiUrl;
-                }
+                window.open(config.url, '_blank', 'noopener,noreferrer');
             } catch (error) {
                 console.error('Prompt konnte nicht vorbereitet werden:', error);
-                if (transferWindow && !transferWindow.closed) transferWindow.close();
-                alert('Der Kontext konnte nicht an Gemini übergeben werden. Bitte versuchen Sie es erneut oder öffnen Sie die PDF manuell.');
+                alert('Der Prompt konnte nicht vorbereitet werden. Bitte laden Sie PDF und Hintergrunddatei manuell herunter.');
             } finally {
                 if (button) {
                     button.disabled = false;
@@ -305,6 +299,7 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
                 }
             }
         }
+        async function continueInGemini() { return continueInAssistant('gemini'); }
         function initializePage() { initializeTailwind(); updateJournalPreview(); }
         window.addEventListener('beforeunload', () => { if (recognition && isListening) { try { recognition.stop(); } catch (e) {} } });
         window.onload = initializePage;
