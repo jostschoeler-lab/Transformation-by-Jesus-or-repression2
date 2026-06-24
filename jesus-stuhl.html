@@ -97,46 +97,59 @@
     <script>
         function scrollToStep(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
         function initializeTailwind() {}
-        let recognition = null; let isListening = false; let currentDictateBtn = null; let currentDictateTextarea = null; let dictationStopRequested = false;
+        let recognition = null; let isListening = false; let currentDictateBtn = null; let currentDictateTextarea = null; let dictationStopRequested = false; let recognitionRestartTimer = null;
+        function createRecognition() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const newRecognition = new SpeechRec();
+            newRecognition.lang = 'de-DE';
+            newRecognition.continuous = true;
+            newRecognition.interimResults = true;
+            newRecognition.onresult = function(event) {
+                const textarea = currentDictateTextarea;
+                if (!textarea) return;
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (!event.results[i].isFinal) continue;
+                    const transcript = event.results[i][0].transcript.trim();
+                    if (transcript) { textarea.value = textarea.value.trim() ? textarea.value + ' ' + transcript : transcript; textarea.dispatchEvent(new Event('input')); }
+                }
+            };
+            newRecognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                if (event.error === 'not-allowed' || event.error === 'service-not-allowed') { dictationStopRequested = true; isListening = false; clearRestartTimer(); updateDictateButton(currentDictateBtn, false); alert('Der Mikrofonzugriff wurde verweigert.\nBitte erlaube den Zugriff in deinen Browsereinstellungen und lade die Seite neu.'); }
+                else if (event.error === 'no-speech' || event.error === 'aborted') { return; }
+                else { dictationStopRequested = true; isListening = false; clearRestartTimer(); updateDictateButton(currentDictateBtn, false); alert('Es gab ein Problem mit der Spracherkennung. Bitte versuche es später erneut.'); }
+            };
+            newRecognition.onend = function() {
+                if (isListening && !dictationStopRequested) { scheduleRecognitionRestart(); return; }
+                isListening = false;
+                clearRestartTimer();
+                updateDictateButton(currentDictateBtn, false);
+                currentDictateBtn = null;
+                currentDictateTextarea = null;
+            };
+            return newRecognition;
+        }
+        function clearRestartTimer() { if (recognitionRestartTimer) { clearTimeout(recognitionRestartTimer); recognitionRestartTimer = null; } }
+        function scheduleRecognitionRestart() {
+            if (!isListening || dictationStopRequested || recognitionRestartTimer) return;
+            recognitionRestartTimer = setTimeout(() => {
+                recognitionRestartTimer = null;
+                if (!isListening || dictationStopRequested) return;
+                try { recognition.start(); }
+                catch (e) { console.log('Recognition restart error:', e); scheduleRecognitionRestart(); }
+            }, 350);
+        }
         function toggleDictation(textareaId, buttonId) {
             const textarea = document.getElementById(textareaId);
             const btn = document.getElementById(buttonId);
             if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) { alert('Spracherkennung wird in diesem Browser leider nicht unterstützt.\nBitte verwende Chrome oder Microsoft Edge.'); return; }
-            if (!recognition) {
-                const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-                recognition = new SpeechRec();
-                recognition.lang = 'de-DE';
-                recognition.continuous = true;
-                recognition.interimResults = false;
-                recognition.onresult = function(event) {
-                    const textarea = currentDictateTextarea;
-                    for (let i = event.resultIndex; i < event.results.length; i++) {
-                        if (!event.results[i].isFinal) continue;
-                        const transcript = event.results[i][0].transcript.trim();
-                        if (transcript && textarea) { textarea.value = textarea.value.trim() ? textarea.value + ' ' + transcript : transcript; textarea.dispatchEvent(new Event('input')); }
-                    }
-                };
-                recognition.onerror = function(event) {
-                    console.error('Speech recognition error:', event.error);
-                    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') { dictationStopRequested = true; isListening = false; updateDictateButton(currentDictateBtn, false); alert('Der Mikrofonzugriff wurde verweigert.\nBitte erlaube den Zugriff in deinen Browsereinstellungen und lade die Seite neu.'); }
-                    else if (event.error !== 'no-speech') { dictationStopRequested = true; isListening = false; updateDictateButton(currentDictateBtn, false); alert('Es gab ein Problem mit der Spracherkennung. Bitte versuche es später erneut.'); }
-                };
-                recognition.onend = function() {
-                    if (isListening && !dictationStopRequested) {
-                        try { recognition.start(); } catch (e) { console.log('Recognition restart error:', e); }
-                        return;
-                    }
-                    isListening = false;
-                    updateDictateButton(currentDictateBtn, false);
-                    currentDictateBtn = null;
-                    currentDictateTextarea = null;
-                };
-            }
+            if (!recognition) recognition = createRecognition();
             if (!isListening) {
-                try { if (currentDictateBtn && currentDictateBtn !== btn) updateDictateButton(currentDictateBtn, false); dictationStopRequested = false; currentDictateBtn = btn; currentDictateTextarea = textarea; recognition.start(); isListening = true; updateDictateButton(btn, true); }
+                try { if (currentDictateBtn && currentDictateBtn !== btn) updateDictateButton(currentDictateBtn, false); clearRestartTimer(); dictationStopRequested = false; currentDictateBtn = btn; currentDictateTextarea = textarea; recognition.start(); isListening = true; updateDictateButton(btn, true); }
                 catch (e) { console.log('Recognition start error:', e); isListening = false; updateDictateButton(btn, false); }
             } else {
                 dictationStopRequested = true;
+                clearRestartTimer();
                 recognition.stop();
                 isListening = false;
                 updateDictateButton(btn, false);
