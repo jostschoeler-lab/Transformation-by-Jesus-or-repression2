@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatGPT mit Buch-Kontext nutzen</title>
+  <title>ChatGPT oder Gemini mit Buch-Kontext nutzen</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -31,10 +31,10 @@
       <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-white/10 border border-white/20 mb-6">
         <i class="fa-solid fa-comments text-3xl"></i>
       </div>
-      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-5">ChatGPT mit dem Buch nutzen</h1>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-5">ChatGPT oder Gemini mit dem Buch nutzen</h1>
       <p class="max-w-3xl mx-auto text-lg md:text-xl text-blue-100 leading-relaxed">
-        Eine normale Webseite kann dein Buch nicht automatisch in den privaten ChatGPT-Chat hochladen.
-        Sie kann dir aber alles so vorbereiten, dass du es mit wenigen Klicks selbst in ChatGPT übergibst.
+        Eine normale Webseite kann dein Buch nicht automatisch in den privaten ChatGPT- oder Gemini-Chat hochladen.
+        Sie kann dir aber alles so vorbereiten, dass du es mit wenigen Klicks selbst in ChatGPT oder Gemini übergibst.
       </p>
     </section>
 
@@ -45,15 +45,22 @@
             <div class="uppercase tracking-[3px] text-[11px] font-extrabold text-blue-600 mb-2">Empfohlener Weg</div>
             <h2 class="text-3xl font-black tracking-tight mb-3">Buch + Hintergrund als Dateien anhängen</h2>
             <p class="text-slate-600 leading-relaxed max-w-2xl">
-              Öffne ChatGPT, starte einen neuen Chat und lade dort die PDF-Datei sowie den vorbereiteten
+              Wähle ChatGPT oder Gemini, starte einen neuen Chat und lade dort die PDF-Datei sowie den passenden vorbereiteten
               Hintergrundtext hoch. Danach kannst du deine Fragen stellen oder den Jesus-Stuhl-Dialog nutzen.
             </p>
           </div>
-          <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center justify-center gap-x-3 px-7 py-4 bg-blue-700 hover:bg-blue-800 transition-colors text-white font-bold rounded-3xl shrink-0">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            <span>ChatGPT öffnen</span>
-          </a>
+          <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-x-3 px-7 py-4 bg-blue-700 hover:bg-blue-800 transition-colors text-white font-bold rounded-3xl">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>ChatGPT öffnen</span>
+            </a>
+            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-x-3 px-7 py-4 bg-amber-600 hover:bg-amber-700 transition-colors text-white font-bold rounded-3xl">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>Gemini öffnen</span>
+            </a>
+          </div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-5">
@@ -68,14 +75,17 @@
               <a href="downloads/chatgpt-hintergrund.txt" download class="text-sm font-semibold text-blue-700 hover:text-blue-900">
                 <i class="fa-solid fa-file-lines mr-2"></i>ChatGPT-Hintergrund herunterladen
               </a>
+              <a href="downloads/gemini-hintergrund.txt" download class="text-sm font-semibold text-blue-700 hover:text-blue-900">
+                <i class="fa-solid fa-file-lines mr-2"></i>Gemini-Hintergrund herunterladen
+              </a>
             </div>
           </div>
 
           <div class="rounded-3xl bg-slate-50 border border-slate-200 p-6">
             <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-4 font-black">2</div>
-            <h3 class="font-bold text-xl mb-2">In ChatGPT anhängen</h3>
+            <h3 class="font-bold text-xl mb-2">In ChatGPT/Gemini anhängen</h3>
             <p class="text-sm text-slate-600">
-              Hänge beide Dateien in einem neuen Chat an. Wenn ChatGPT nachfragt, bestätige,
+              Hänge die PDF und die passende Hintergrunddatei in einem neuen Chat an. Wenn der Dienst nachfragt, bestätige,
               dass die Dateien als Grundlage für die Antworten dienen sollen.
             </p>
           </div>
@@ -96,7 +106,7 @@
       <div class="bg-white/95 rounded-3xl border border-white p-7">
         <h2 class="text-2xl font-black mb-3">Warum nicht automatisch?</h2>
         <p class="text-slate-600 leading-relaxed">
-          Der normale ChatGPT-Chat ist kein API-Endpunkt, an den diese statische GitHub-Pages-Seite heimlich
+          Der normale ChatGPT- oder Gemini-Chat ist kein API-Endpunkt, an den diese statische GitHub-Pages-Seite heimlich
           Dateien weiterleiten darf. Das schützt deine Privatsphäre. Automatisches Senden wäre erst mit einer
           eigenen Server-/API-Integration möglich.
         </p>
@@ -104,7 +114,7 @@
       <div class="bg-white/95 rounded-3xl border border-white p-7">
         <h2 class="text-2xl font-black mb-3">Professionelle Alternative</h2>
         <p class="text-slate-600 leading-relaxed">
-          Für eine echte App wäre die OpenAI API der passende Weg: Buchinhalt als Datei oder Retrieval-Wissen
+          Für eine echte App wären Anbieter-APIs der passende Weg: Buchinhalt als Datei oder Retrieval-Wissen
           bereitstellen, Dialogregeln als System-Anweisung definieren und Nutzerfragen darüber beantworten.
         </p>
       </div>
