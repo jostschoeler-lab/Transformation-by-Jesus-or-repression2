@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT mit Buch-Kontext nutzen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-100 text-slate-900">
+  <nav class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center gap-x-3 font-bold text-slate-900">
+          <div class="w-10 h-10 bg-blue-700 rounded-2xl flex items-center justify-center">
+            <i class="fa-solid fa-cross text-white text-2xl"></i>
+          </div>
+          <span>Verwandlung mit Jesus</span>
+        </a>
+        <a href="vertiefung.html" class="text-sm font-semibold text-blue-700 hover:text-blue-900">Zur Vertiefung</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-6 py-12">
+    <section class="text-white text-center mb-10">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-white/10 border border-white/20 mb-6">
+        <i class="fa-solid fa-comments text-3xl"></i>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-5">ChatGPT mit dem Buch nutzen</h1>
+      <p class="max-w-3xl mx-auto text-lg md:text-xl text-blue-100 leading-relaxed">
+        Eine normale Webseite kann dein Buch nicht automatisch in den privaten ChatGPT-Chat hochladen.
+        Sie kann dir aber alles so vorbereiten, dass du es mit wenigen Klicks selbst in ChatGPT übergibst.
+      </p>
+    </section>
+
+    <section class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200 mb-8">
+      <div class="p-7 md:p-10">
+        <div class="flex flex-col md:flex-row gap-6 md:items-center md:justify-between mb-8">
+          <div>
+            <div class="uppercase tracking-[3px] text-[11px] font-extrabold text-blue-600 mb-2">Empfohlener Weg</div>
+            <h2 class="text-3xl font-black tracking-tight mb-3">Buch + Hintergrund als Dateien anhängen</h2>
+            <p class="text-slate-600 leading-relaxed max-w-2xl">
+              Öffne ChatGPT, starte einen neuen Chat und lade dort die PDF-Datei sowie den vorbereiteten
+              Hintergrundtext hoch. Danach kannst du deine Fragen stellen oder den Jesus-Stuhl-Dialog nutzen.
+            </p>
+          </div>
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center gap-x-3 px-7 py-4 bg-blue-700 hover:bg-blue-800 transition-colors text-white font-bold rounded-3xl shrink-0">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>ChatGPT öffnen</span>
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="rounded-3xl bg-slate-50 border border-slate-200 p-6">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-4 font-black">1</div>
+            <h3 class="font-bold text-xl mb-2">Dateien laden</h3>
+            <p class="text-sm text-slate-600 mb-4">Speichere Buch und Hintergrundtext lokal ab.</p>
+            <div class="flex flex-col gap-3">
+              <a href="downloads/verwandlung-oder-verdraengung.pdf" download class="text-sm font-semibold text-blue-700 hover:text-blue-900">
+                <i class="fa-solid fa-file-pdf mr-2"></i>PDF herunterladen
+              </a>
+              <a href="downloads/chatgpt-hintergrund.txt" download class="text-sm font-semibold text-blue-700 hover:text-blue-900">
+                <i class="fa-solid fa-file-lines mr-2"></i>ChatGPT-Hintergrund herunterladen
+              </a>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 border border-slate-200 p-6">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-4 font-black">2</div>
+            <h3 class="font-bold text-xl mb-2">In ChatGPT anhängen</h3>
+            <p class="text-sm text-slate-600">
+              Hänge beide Dateien in einem neuen Chat an. Wenn ChatGPT nachfragt, bestätige,
+              dass die Dateien als Grundlage für die Antworten dienen sollen.
+            </p>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 border border-slate-200 p-6">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-4 font-black">3</div>
+            <h3 class="font-bold text-xl mb-2">Start-Prompt senden</h3>
+            <p class="text-sm text-slate-600 mb-4">Kopiere diesen Text als erste Nachricht:</p>
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 text-xs text-slate-700 leading-relaxed">
+              Bitte nutze die angehängten Dateien als Hintergrund. Antworte seelsorgerlich, ruhig und nicht manipulativ. Sprich nicht als Jesus und simuliere Jesus nicht. Hilf mir, mit meinen echten Gefühlen zum Thron der Gnade zu kommen.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white/95 rounded-3xl border border-white p-7">
+        <h2 class="text-2xl font-black mb-3">Warum nicht automatisch?</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Der normale ChatGPT-Chat ist kein API-Endpunkt, an den diese statische GitHub-Pages-Seite heimlich
+          Dateien weiterleiten darf. Das schützt deine Privatsphäre. Automatisches Senden wäre erst mit einer
+          eigenen Server-/API-Integration möglich.
+        </p>
+      </div>
+      <div class="bg-white/95 rounded-3xl border border-white p-7">
+        <h2 class="text-2xl font-black mb-3">Professionelle Alternative</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Für eine echte App wäre die OpenAI API der passende Weg: Buchinhalt als Datei oder Retrieval-Wissen
+          bereitstellen, Dialogregeln als System-Anweisung definieren und Nutzerfragen darüber beantworten.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
