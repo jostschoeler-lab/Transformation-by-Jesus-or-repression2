@@ -86,8 +86,12 @@
                 <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button></div>
                 <div class="mt-6 rounded-3xl border border-amber-100 bg-amber-50/60 p-5">
                     <h3 class="font-semibold text-xl tracking-tight text-stone-900 mb-2">Möchten Sie diesen Dialog vertiefen?</h3>
-                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog direkt in Gemini weiter besprechen. Die beiden Eingaben, die Webseiteninhalte und ein Hintergrundhinweis zum Buch werden als Kontext in den Prompt kopiert; Gemini öffnet sich danach in einem neuen Tab.</p>
-                    <button onclick="continueInGemini()" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Dialog in Gemini vertiefen</span></button>
+                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog in Gemini weiter besprechen. Aus Browser-Sicherheitsgründen kann diese Webseite das PDF nicht automatisch als Gemini-Anlage hochladen. Stattdessen wird der vollständige Kontext inklusive Buch-Hintergrund und PDF-Link kopiert, Gemini wird direkt geöffnet, und das Buch-PDF kann daneben geöffnet und bei Bedarf manuell in Gemini hochgeladen werden.</p>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="continueInGemini()" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Dialog in Gemini vertiefen</span></button>
+                        <a href="downloads/verwandlung-oder-verdraengung.pdf" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-200 hover:bg-amber-50 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-file-pdf"></i><span>Buch-PDF öffnen</span></a>
+                    </div>
+                    <p class="text-xs leading-5 text-amber-800/80 mt-3">Wichtig: Ein automatisches Anhängen der PDF-Datei an Gemini ist von einer normalen Webseite aus nicht zuverlässig möglich. Wenn Gemini den Link nicht selbst auswertet, öffnen Sie bitte die PDF über den zweiten Button und laden Sie sie in Gemini manuell hoch; der kopierte Prompt weist Gemini ausdrücklich darauf hin.</p>
                 </div>
                 <p class="text-center text-xs text-stone-400 mt-4">Deine Einträge bleiben privat in diesem Browser gespeichert.</p>
             </div></div>
@@ -192,12 +196,18 @@
         async function buildGeminiPrompt() {
             const { sprich, wahrnehmen } = collectGnadenthronDialogInputs();
             const backgroundContext = await loadGeminiBackgroundContext();
+            const absoluteUrl = (path) => new URL(path, window.location.href).href;
+            const bookPdfUrl = absoluteUrl('downloads/verwandlung-oder-verdraengung.pdf');
+            const backgroundTextUrl = absoluteUrl('downloads/gemini-hintergrund.txt');
             const formatEntry = (value) => value || '[Keine Eingabe notiert]';
             return `Bitte hilf mir, meinen bisherigen Jesus-Stuhl-/Gnadenthron-Dialog ruhig, seelsorgerlich und nicht manipulativ weiter zu reflektieren.
 
 Wichtig: Sprich bitte nicht als Jesus und simuliere Jesus nicht. Antworte stattdessen als achtsame, unterstützende Reflexionshilfe mit christlichem Hintergrund. Stelle behutsame Fragen, fasse mögliche Themen zusammen und achte darauf, keine vorschnellen Deutungen oder Druck aufzubauen.
 
-Nutze den folgenden Hintergrund aus der Webseite, den Grundgedanken, Modellen und dem Buchhinweis „Verwandlung oder Verdrängung?“ als Kontext. Die persönlichen Dialogeingaben stehen danach und sollen im Mittelpunkt bleiben.
+Nutze den folgenden Hintergrund aus der Webseite, den Grundgedanken, Modellen und dem Buch „Verwandlung oder Verdrängung?“ als Kontext. Die persönlichen Dialogeingaben stehen danach und sollen im Mittelpunkt bleiben.
+
+Wichtig zur Dateiübernahme: Das vollständige Buch-PDF ist öffentlich hier erreichbar: ${bookPdfUrl}
+Falls du den PDF-Link nicht selbst abrufen kannst, bitte mich ausdrücklich, die PDF-Datei in Gemini hochzuladen. Der komprimierte Hintergrundtext steht hier: ${backgroundTextUrl}
 
 ===== HINTERGRUNDKONTEXT AUS WEBSEITE UND BUCH =====
 ${backgroundContext}
@@ -230,23 +240,21 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
             if (!copied) throw new Error('Clipboard copy failed');
         }
         async function continueInGemini() {
-            const prompt = await buildGeminiPrompt();
-            const shortPrompt = 'Ich habe einen vollständigen Kontext-Prompt aus dem Jesus-Stuhl in der Zwischenablage. Bitte nutze nach dem Einfügen alle Hintergrunddaten, Webseiteninhalte, den Buchhinweis und meine beiden Dialogeingaben als Kontext.';
-            const geminiUrl = 'https://gemini.google.com/app?prompt=' + encodeURIComponent(shortPrompt);
-            const geminiWindow = window.open('about:blank', '_blank', 'noopener,noreferrer');
+            const geminiUrl = 'https://gemini.google.com/app';
+            const geminiWindow = window.open(geminiUrl, '_blank');
+            let prompt = '';
 
             try {
+                prompt = await buildGeminiPrompt();
                 await copyTextToClipboard(prompt);
-                showToast('Der vollständige Kontext-Prompt wurde kopiert. Gemini wird jetzt geöffnet. Fügen Sie ihn dort ein, falls er nicht automatisch übernommen wird.');
+                showToast('Der vollständige Kontext-Prompt wurde kopiert. Gemini ist geöffnet: Bitte dort einfügen. Falls Gemini die PDF nicht lesen kann, laden Sie die Buch-PDF manuell hoch.');
             } catch (error) {
                 console.error('Prompt konnte nicht kopiert werden:', error);
                 alert('Der Prompt konnte nicht automatisch kopiert werden. Bitte kopieren Sie ihn manuell aus dem nächsten Hinweis.');
-                window.prompt('Prompt für Gemini kopieren:', prompt);
+                window.prompt('Prompt für Gemini kopieren:', typeof prompt === 'string' ? prompt : 'Der Prompt konnte nicht erstellt werden. Bitte versuchen Sie es erneut.');
             }
 
-            if (geminiWindow) {
-                geminiWindow.location.href = geminiUrl;
-            } else {
+            if (!geminiWindow) {
                 window.location.href = geminiUrl;
             }
         }
