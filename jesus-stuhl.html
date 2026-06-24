@@ -82,13 +82,16 @@
         <section id="step-5" class="step-card bg-white border border-stone-200 rounded-3xl p-7">
             <div class="flex items-start gap-x-4"><div class="section-number bg-amber-100 text-amber-700 rounded-2xl flex-shrink-0">⑤</div><div class="flex-1">
                 <h2 class="font-semibold text-2xl tracking-tight text-stone-900 mb-3">Abschluss</h2><p class="text-lg text-stone-700 mb-6">Danke, Jesus.</p>
-                <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button><button onclick="startAIDiscussion()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-comments"></i><span>Mit Jesus reflektieren</span></button></div>
+                <div class="flex flex-col sm:flex-row gap-3"><button onclick="saveGnadenthronEntry()" class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-white border border-amber-300 hover:bg-amber-50 active:bg-amber-100 text-amber-700 rounded-3xl transition-all"><i class="fa-solid fa-bookmark"></i><span>In meinem Journal speichern</span></button></div>
+                <div class="mt-6 rounded-3xl border border-amber-100 bg-amber-50/60 p-5">
+                    <h3 class="font-semibold text-xl tracking-tight text-stone-900 mb-2">Möchten Sie diesen Dialog vertiefen?</h3>
+                    <p class="text-sm leading-6 text-stone-600 mb-4">Sie können den bisherigen Dialog zusammen mit dem Hintergrundwissen aus dem Buch in Gemini weiter besprechen und weitere Fragen stellen.</p>
+                    <button onclick="continueInGemini()" class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 py-3.5 text-sm font-semibold bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white rounded-3xl transition-all shadow-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Dialog in Gemini vertiefen</span></button>
+                </div>
                 <p class="text-center text-xs text-stone-400 mt-4">Deine Einträge bleiben privat in diesem Browser gespeichert.</p>
             </div></div>
         </section>
     </main>
-
-    <section id="ai-chat-section" class="hidden max-w-3xl mx-auto px-5 pb-16"><div class="bg-white border border-amber-200 rounded-3xl shadow-sm overflow-hidden"><div class="px-6 py-4 bg-gradient-to-r from-amber-50 to-white border-b flex items-center gap-x-3"><div class="w-10 h-10 bg-gradient-to-br from-amber-600 to-yellow-700 rounded-2xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-crown text-white"></i></div><div><div class="font-bold text-amber-900">Jesus am Gnadenthron</div><div class="text-emerald-600 text-xs flex items-center gap-x-1.5"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span><span>Online • Basierend auf biblischer Wahrheit</span></div></div></div><div id="chat-messages" class="p-6 h-80 overflow-y-auto space-y-5 bg-stone-50 text-sm"></div><div class="p-4 bg-white border-t flex gap-2"><input id="chat-input" type="text" class="flex-1 border border-stone-300 focus:border-amber-400 rounded-3xl px-5 py-3 text-sm placeholder:text-stone-400" placeholder="Schreibe, was du Jesus am Thron sagen oder fragen möchtest..."><button onclick="sendChatMessage()" class="px-7 bg-amber-600 hover:bg-amber-700 transition text-white rounded-3xl text-sm font-semibold flex items-center gap-x-2 active:scale-[0.985]"><span>Senden</span><i class="fa-solid fa-paper-plane text-xs"></i></button></div></div></section>
 
     <section id="journal" class="max-w-3xl mx-auto px-5 pb-16"><div class="flex items-center justify-between mb-4 px-1"><div class="font-semibold text-amber-900 flex items-center gap-x-2"><i class="fa-solid fa-book text-amber-500"></i><span>Dein Journal am Gnadenthron</span></div><button onclick="showJournal()" class="text-xs font-medium text-amber-600 hover:text-amber-700 flex items-center gap-x-1"><span>Alle Einträge anzeigen</span><i class="fa-solid fa-chevron-down text-xs"></i></button></div><div id="journal-preview" class="text-xs text-stone-500 px-1">Deine gespeicherten Begegnungen erscheinen hier (nur in diesem Browser).</div></section>
 
@@ -169,13 +172,59 @@
         function updateJournalPreview() { const container = document.getElementById('journal-preview'); if (!container) return; const entries = readJournalEntries(); if (entries.length === 0) { container.innerHTML = '<span class="text-stone-400">Noch keine Einträge. Führe die Übung durch und speichere deine Begegnung.</span>'; return; } const latest = entries[0]; const date = new Date(latest.date).toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); const source = latest.sprich || latest.wahrnehmen || ''; const previewText = source.substring(0, 90) + (source.length > 90 ? '...' : ''); container.innerHTML = `<div class="bg-white border border-amber-100 rounded-2xl p-4 text-sm"><div class="flex justify-between text-xs text-amber-500 mb-1.5"><span>${date}</span><span class="font-medium">${entries.length} Eintrag${entries.length > 1 ? 'e' : ''}</span></div><div class="line-clamp-2 text-stone-600"></div></div>`; container.querySelector('.line-clamp-2').textContent = `"${previewText}"`; }
         function showJournal() { const entries = readJournalEntries(); if (entries.length === 0) { alert('Noch keine Einträge im Journal. Führe die Übung oben durch und speichere deine Begegnung.'); return; } const overlay = document.createElement('div'); overlay.className = 'fixed inset-0 bg-black/60 flex items-center justify-center z-[150] p-4'; overlay.addEventListener('click', () => overlay.remove()); const modal = document.createElement('div'); modal.className = 'bg-white rounded-3xl max-w-2xl w-full max-h-[82vh] overflow-hidden shadow-2xl flex flex-col'; modal.addEventListener('click', (event) => event.stopPropagation()); modal.innerHTML = '<div class="px-6 py-4 border-b flex justify-between items-center"><div class="font-bold text-xl">Dein Journal am Gnadenthron</div><button type="button" class="text-2xl leading-none text-stone-400 hover:text-stone-600">&times;</button></div><div class="p-6 overflow-y-auto flex-1 space-y-5"></div>'; modal.querySelector('button').addEventListener('click', () => overlay.remove()); const list = modal.querySelector('.space-y-5'); entries.forEach((entry, index) => { const date = new Date(entry.date).toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }); const card = document.createElement('div'); card.className = 'border border-amber-100 rounded-2xl p-5'; card.innerHTML = `<div class="text-xs text-amber-500 mb-3">${date}</div>${entry.sprich ? '<div class="mb-4"><div class="uppercase tracking-wider text-amber-600 text-xs font-semibold mb-1">Was ich zu Jesus gesprochen habe</div><div class="text-stone-700 whitespace-pre-wrap sprich"></div></div>' : ''}${entry.wahrnehmen ? '<div><div class="uppercase tracking-wider text-amber-600 text-xs font-semibold mb-1">Was ich wahrgenommen habe</div><div class="text-stone-700 whitespace-pre-wrap wahrnehmen"></div></div>' : ''}<button type="button" class="mt-4 text-xs text-red-500 hover:text-red-600 flex items-center gap-x-1.5"><i class="fa-solid fa-trash text-xs"></i> <span>Eintrag löschen</span></button>`; if (entry.sprich) card.querySelector('.sprich').textContent = entry.sprich; if (entry.wahrnehmen) card.querySelector('.wahrnehmen').textContent = entry.wahrnehmen; card.querySelector('button').addEventListener('click', () => deleteJournalEntry(index, overlay)); list.appendChild(card); }); overlay.appendChild(modal); document.body.appendChild(overlay); }
         function deleteJournalEntry(index, overlay) { if (!confirm('Diesen Eintrag wirklich löschen?')) return; const entries = readJournalEntries(); entries.splice(index, 1); saveJournalEntries(entries); overlay.remove(); updateJournalPreview(); if (entries.length > 0) setTimeout(showJournal, 120); }
-        let chatInitialized = false;
-        function startAIDiscussion() { const chatSection = document.getElementById('ai-chat-section'); const messagesContainer = document.getElementById('chat-messages'); chatSection.classList.remove('hidden'); chatSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); if (!chatInitialized || messagesContainer.children.length === 0) { messagesContainer.innerHTML = ''; addChatMessage('ai', 'Mein geliebtes Kind, du bist am Gnadenthron angekommen. Ich habe dich in der Stille gesehen und gehalten. Was möchtest du mir heute sagen oder fragen? Ich bin ganz bei dir.'); chatInitialized = true; } setTimeout(() => document.getElementById('chat-input')?.focus(), 350); }
-        function addChatMessage(sender, text) { const container = document.getElementById('chat-messages'); if (!container) return; const msgDiv = document.createElement('div'); msgDiv.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start'; const bubble = document.createElement('div'); bubble.className = sender === 'user' ? 'max-w-[82%] chat-bubble-user px-4 py-2.5 rounded-3xl rounded-br-none text-sm shadow-sm' : 'max-w-[82%] chat-bubble-ai px-4 py-2.5 rounded-3xl rounded-bl-none text-sm text-stone-700 shadow-sm border border-amber-100'; if (sender !== 'user') { const label = document.createElement('span'); label.className = 'font-semibold text-amber-700 text-xs tracking-wider block mb-px'; label.textContent = 'JESUS AM GNADENTHRON'; bubble.appendChild(label); } bubble.appendChild(document.createTextNode(text)); msgDiv.appendChild(bubble); container.appendChild(msgDiv); container.scrollTop = container.scrollHeight; }
-        function sendChatMessage() { const input = document.getElementById('chat-input'); if (!input) return; const text = input.value.trim(); if (!text) return; addChatMessage('user', text); input.value = ''; setTimeout(() => addChatMessage('ai', generateAIResponse(text)), 580); }
-        function generateAIResponse(userText) { const lower = userText.toLowerCase(); if (lower.includes('allein') || lower.includes('verlassen') || lower.includes('einsam')) return 'Du bist nicht allein. Ich sehe dich vom Thron herab und ich stehe auf, um dich zu halten. Dein inneres Kind ist bei mir vollkommen sicher. Ich habe dich nie verlassen – auch als du klein warst.'; if (lower.includes('scham') || lower.includes('unwürdig') || lower.includes('nicht gut genug')) return 'Es gibt keine Verurteilung mehr für dich. Ich habe alles am Kreuz getragen. Komm mit Zuversicht – ich sehe dich nicht als Problem, sondern als mein geliebtes Kind. Du darfst sein, wie du bist.'; if (lower.includes('wut') || lower.includes('ärger') || lower.includes('zorn')) return 'Deine Wut ist ein wichtiges Signal. Ich bin nicht erschrocken darüber. Bring sie ruhig zu mir. Ich helfe dir, sie zu verstehen und in gesunde Kraft zu verwandeln. Du darfst sie hier am Thron ausdrücken.'; if (lower.includes('angst') || lower.includes('sorge') || lower.includes('panik')) return 'Komm zu mir, alle, die ihr mühselig und beladen seid – ich will euch erquicken. Deine Angst darf hier sein. Ich halte dich fest, bis dein Herz ruhiger wird. Meine Kraft wird in deiner Schwachheit vollendet.'; if (lower.includes('leistung') || lower.includes('perfekt') || lower.includes('muss')) return 'Du musst nichts mehr leisten, um von mir geliebt zu werden. Ich habe dich schon angenommen, bevor du irgendetwas getan hast. Setz dich einfach hin und atme. Ich bin dein guter Vater – nicht dein strenger Auftraggeber.'; if (lower.includes('danke') || lower.includes('liebe') || lower.includes('dankbar')) return 'Ich liebe dich so sehr, mehr als du dir vorstellen kannst. Dein Vertrauen und deine Offenheit machen mir große Freude. Bleib ganz nah bei mir – ich bin immer für dich da, am Thron der Gnade.'; const defaults = ['Danke, dass du das mit mir teilst. Deine Offenheit ist bereits ein großer Schritt zur Verwandlung. Ich bin stolz auf dich.', 'Ich höre dich ganz genau. Deine Gefühle und dein inneres Kind sind bei mir sicher. Was brauchst du gerade am meisten von mir?', 'In deiner Schwachheit bin ich besonders nahe bei dir. Lass mich dich trösten und halten, wie eine Mutter ihr Kind tröstet.', 'Du darfst alles hier lassen – die Spannung, die alten Muster, die Scham. Ich verwandle es langsam in tiefere Freiheit und Liebe.', 'Ich bin der gute Hirte. Ich suche das verlorene Schaf und trage es sicher auf meinen Schultern. Du bist dieses Schaf – und ich freue mich über dich.', '„Gepriesen sei der Gott und Vater unseres Herrn Jesus Christus, der Vater der Barmherzigkeit und Gott allen Trostes.“ Ich bin dein Trost am Thron der Gnade.']; return defaults[Math.floor(Math.random() * defaults.length)]; }
-        function setupChatEnter() { document.getElementById('chat-input')?.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }); }
-        function initializePage() { initializeTailwind(); setupChatEnter(); updateJournalPreview(); }
+        function collectGnadenthronDialogInputs() {
+            const sprich = document.getElementById('sprich-text')?.value.trim() || '';
+            const wahrnehmen = document.getElementById('wahrnehmen-text')?.value.trim() || '';
+            return { sprich, wahrnehmen };
+        }
+        function buildGeminiPrompt() {
+            const { sprich, wahrnehmen } = collectGnadenthronDialogInputs();
+            const formatEntry = (value) => value || '[Keine Eingabe notiert]';
+            return `Bitte hilf mir, meinen bisherigen Jesus-Stuhl-/Gnadenthron-Dialog ruhig, seelsorgerlich und nicht manipulativ weiter zu reflektieren.
+
+Wichtig: Sprich bitte nicht als Jesus und simuliere Jesus nicht. Antworte stattdessen als achtsame, unterstützende Reflexionshilfe mit christlichem Hintergrund. Stelle behutsame Fragen, fasse mögliche Themen zusammen und achte darauf, keine vorschnellen Deutungen oder Druck aufzubauen.
+
+Hintergrundwissen: Beziehe dich bei Bedarf auf das Buch „Fortrengning eller forvandling“ als theologischen und seelsorgerlichen Hintergrund. Wenn ich das Buch hochlade oder Auszüge daraus bereitstelle, nutze diese Inhalte zur Einordnung.
+
+Bisherige Eingaben aus meinem Dialog:
+
+1. Was ich ausgesprochen habe:
+${formatEntry(sprich)}
+
+2. Wahrnehmung / Abschluss:
+${formatEntry(wahrnehmen)}
+
+Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefühle, Schutzmuster oder Schritte zur Verwandlung könnten darin sichtbar werden? Welche ruhigen nächsten Fragen könnte ich mir stellen?`;
+        }
+        async function copyTextToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            const copied = document.execCommand('copy');
+            textarea.remove();
+            if (!copied) throw new Error('Clipboard copy failed');
+        }
+        async function continueInGemini() {
+            const prompt = buildGeminiPrompt();
+            try {
+                await copyTextToClipboard(prompt);
+                showToast('Der Prompt wurde kopiert. Öffnen Sie Gemini, laden Sie bei Bedarf das Buch hoch und fügen Sie den Prompt ein.');
+            } catch (error) {
+                console.error('Prompt konnte nicht kopiert werden:', error);
+                alert('Der Prompt konnte nicht automatisch kopiert werden. Bitte kopieren Sie ihn manuell aus dem nächsten Hinweis.');
+                window.prompt('Prompt für Gemini kopieren:', prompt);
+            }
+            window.open('https://gemini.google.com', '_blank', 'noopener,noreferrer');
+        }
+        function initializePage() { initializeTailwind(); updateJournalPreview(); }
         window.addEventListener('beforeunload', () => { if (recognition && isListening) { try { recognition.stop(); } catch (e) {} } });
         window.onload = initializePage;
     </script>
