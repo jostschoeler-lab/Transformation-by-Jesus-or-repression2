@@ -244,24 +244,24 @@ Bitte hilf mir, diesen Dialog weiter zu vertiefen: Welche inneren Themen, Gefüh
             if (!copied) throw new Error('Clipboard copy failed');
         }
         async function continueInGemini() {
-            const prompt = await buildGeminiPrompt();
-            const shortPrompt = 'Ich habe einen vollständigen Kontext-Prompt aus dem Jesus-Stuhl in der Zwischenablage. Bitte nutze nach dem Einfügen alle Hintergrunddaten, Webseiteninhalte, den PDF-Link zum Buch und meine beiden Dialogeingaben als Kontext.';
+            const shortPrompt = 'Ich habe einen vollständigen Kontext-Prompt aus dem Jesus-Stuhl in der Zwischenablage. Bitte nutze nach dem Einfügen alle Hintergrunddaten, Webseiteninhalte, den PDF-Link bzw. Buchhinweis und meine beiden Dialogeingaben als Kontext.';
             const geminiUrl = 'https://gemini.google.com/app?prompt=' + encodeURIComponent(shortPrompt);
-            const geminiWindow = window.open('about:blank', '_blank', 'noopener,noreferrer');
-
-            try {
-                await copyTextToClipboard(prompt);
-                showToast('Der vollständige Kontext-Prompt wurde kopiert. Gemini wird jetzt geöffnet. Fügen Sie ihn dort ein, falls er nicht automatisch übernommen wird.');
-            } catch (error) {
-                console.error('Prompt konnte nicht kopiert werden:', error);
-                alert('Der Prompt konnte nicht automatisch kopiert werden. Bitte kopieren Sie ihn manuell aus dem nächsten Hinweis.');
-                window.prompt('Prompt für Gemini kopieren:', prompt);
-            }
+            const geminiWindow = window.open(geminiUrl, '_blank');
 
             if (geminiWindow) {
-                geminiWindow.location.href = geminiUrl;
+                geminiWindow.opener = null;
             } else {
                 window.location.href = geminiUrl;
+                return;
+            }
+
+            try {
+                const prompt = await buildGeminiPrompt();
+                await copyTextToClipboard(prompt);
+                showToast('Gemini wurde geöffnet. Der vollständige Kontext-Prompt wurde kopiert – fügen Sie ihn dort ein, falls er nicht automatisch übernommen wird.');
+            } catch (error) {
+                console.error('Prompt konnte nicht vorbereitet oder kopiert werden:', error);
+                alert('Gemini wurde geöffnet, aber der vollständige Prompt konnte nicht automatisch kopiert werden. Bitte versuchen Sie es erneut oder kopieren Sie Ihre Eingaben manuell.');
             }
         }
         function initializePage() { initializeTailwind(); updateJournalPreview(); }
